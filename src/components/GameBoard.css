@@ -65,6 +65,22 @@
   background-color: rgba(0, 0, 255, 0.2);
 }
 
+.cell.highlighted {
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+.hint-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.hint-marker-0 { top: 5px; right: 5px; }
+.hint-marker-1 { top: 5px; left: 5px; }
+.hint-marker-2 { bottom: 5px; right: 5px; }
+.hint-marker-3 { bottom: 5px; left: 5px; }
+
 .check-solution-button {
   margin-top: 20px;
   padding: 10px 20px;

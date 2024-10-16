@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GameBoard from './components/GameBoard';
 import Tiles from './components/Tiles';
+import Hints from './components/Hints';
 import { demoPuzzles } from './demoPuzzles';
 import './App.css';
 
@@ -12,6 +13,7 @@ function App() {
   const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
   const [tiles, setTiles] = useState([]);
   const [boardTiles, setBoardTiles] = useState({});
+  const [activeHint, setActiveHint] = useState(null);
 
   useEffect(() => {
     const puzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
@@ -50,6 +52,16 @@ function App() {
     }
   }, []);
 
+  const handleHintHover = useCallback((hintId) => {
+    setActiveHint(hintId);
+  }, []);
+
+  const handleHintLeave = useCallback(() => {
+    setActiveHint(null);
+  }, []);
+
+  const currentPuzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
@@ -61,10 +73,17 @@ function App() {
             boardTiles={boardTiles} 
             onTilePlacement={handleTilePlacement}
             onInvalidDrop={handleInvalidDrop}
-            puzzle={demoPuzzles.find(p => p.id === currentPuzzleId)}
+            puzzle={currentPuzzle}
             onCheckSolution={handleCheckSolution}
+            activeHint={activeHint}
+            hints={currentPuzzle.hints}
           />
           <Tiles tiles={tiles.filter(tile => !tile.isPlaced)} />
+          <Hints 
+            hints={currentPuzzle.hints}
+            onHintHover={handleHintHover}
+            onHintLeave={handleHintLeave}
+          />
         </main>
         <div className="puzzle-selector">
           {[1, 2, 3].map(id => (

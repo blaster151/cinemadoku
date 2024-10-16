@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import './GameBoard.css';
 
-function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, onSwap }) {
+function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, onSwap, hintColors, isHighlighted }) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'tile',
     drop: (item, monitor) => {
@@ -30,7 +30,8 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
     'cell',
     type ? type.toLowerCase() : 'empty',
     isOver ? 'is-over' : '',
-    canDrop ? 'can-drop' : ''
+    canDrop ? 'can-drop' : '',
+    isHighlighted ? 'highlighted' : ''
   ].filter(Boolean).join(' ');
 
   return (
@@ -45,11 +46,14 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
           )}
         </div>
       )}
+      {hintColors.map((color, index) => (
+        <div key={index} className={`hint-marker hint-marker-${index}`} style={{ backgroundColor: color }}></div>
+      ))}
     </div>
   );
 }
 
-function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheckSolution }) {
+function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheckSolution, activeHint, hints }) {
   const boardPattern = [
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
     ['Actor', null, 'Actor', null, 'Actor'],
@@ -88,6 +92,13 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheck
     }));
   }, [onTilePlacement, boardTiles]);
 
+  const getHintColorsForCell = useCallback((rowIndex, cellIndex) => {
+    const tileId = puzzle.solution[rowIndex][cellIndex];
+    return hints
+      .filter(hint => hint.relatedTiles.includes(tileId))
+      .map(hint => hint.color);
+  }, [puzzle.solution, hints]);
+
   const handleCheckSolution = () => {
     const misplacedTiles = Object.entries(tiles).reduce((count, [position, tile]) => {
       const [row, col] = position.split('-').map(Number);
@@ -112,6 +123,8 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheck
               onInvalidDrop={onInvalidDrop}
               onSwap={handleSwap}
               placedTile={tiles[`${rowIndex}-${cellIndex}`]}
+              hintColors={getHintColorsForCell(rowIndex, cellIndex)}
+              isHighlighted={activeHint && hints.find(h => h.id === activeHint)?.relatedTiles.includes(puzzle.solution[rowIndex][cellIndex])}
             />
           ))
         ))}

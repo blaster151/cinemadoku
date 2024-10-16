@@ -1,0 +1,22 @@
+.hints-container {
+    margin-top: 20px;
+  }
+  
+  .hints-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .hint-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .hint-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
