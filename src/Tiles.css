@@ -1,0 +1,11 @@
+.tiles-container {
+    width: 100%;
+    max-width: 550px; /* Slightly wider to accommodate 5 tiles */
+  }
+  
+  .tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    justify-content: center;
+  }

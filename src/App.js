@@ -9,9 +9,13 @@ function App() {
       <header className="App-header">
         <h1>My React Game</h1>
       </header>
-      <main>
-        <GameBoard />
-        <Tiles />
+      <main className="App-main">
+        <div className="game-section">
+          <GameBoard />
+        </div>
+        <div className="tiles-section">
+          <Tiles />
+        </div>
       </main>
     </div>
   );
