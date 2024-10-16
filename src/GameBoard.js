@@ -1,39 +1,25 @@
 import React from 'react';
-import './GameBoard.css';
+import Tile from './Tile';
+import '../styles/GameBoard.css';
 
-function GameBoard() {
-  const boardPattern = [
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
-    ['Actor', null, 'Actor', null, 'Actor'],
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
-    ['Actor', null, 'Actor', null, 'Actor'],
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie']
-  ];
-
-  const renderCell = (type, rowIndex, cellIndex) => {
-    if (type === null) {
-      return <div key={`${rowIndex}-${cellIndex}`} className="cell empty"></div>;
-    }
-    return (
-      <div key={`${rowIndex}-${cellIndex}`} className={`cell ${type.toLowerCase()}`}>
-        {type}
-      </div>
-    );
-  };
-
-  const renderRow = (row, rowIndex) => {
-    return (
-      <div key={rowIndex} className="row">
-        {row.map((cellType, cellIndex) => renderCell(cellType, rowIndex, cellIndex))}
-      </div>
-    );
-  };
-
+const GameBoard = ({ board, onTileClick }) => {
   return (
     <div className="game-board">
-      {boardPattern.map((row, rowIndex) => renderRow(row, rowIndex))}
+      {board.map((row, rowIndex) => (
+        <div key={rowIndex} className="board-row">
+          {row.map((tile, colIndex) => (
+            <div key={colIndex} className="board-tile">
+              <Tile
+                image={tile.image}
+                onClick={() => onTileClick(rowIndex, colIndex)}
+              />
+              {tile.name && <div className="tile-name">{tile.name}</div>}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default GameBoard;

@@ -21,6 +21,19 @@
   max-width: 500px;
 }
 
+.puzzle-selector {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.puzzle-selector button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 @media (max-width: 1024px) {
   .App-main {
     flex-direction: column;

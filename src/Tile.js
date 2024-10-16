@@ -1,19 +1,12 @@
 import React from 'react';
-import './Tile.css';
+import '../styles/Tile.css';
 
-function Tile({ type, data }) {
+const Tile = ({ image, onClick }) => {
   return (
-    <div className={`tile ${type.toLowerCase()}`}>
-      {type === 'Actor' ? (
-        <>
-          <img src={`https://placekitten.com/100/100?image=${Math.floor(Math.random() * 16) + 1}`} alt={data.name} />
-          <p>{data.name}</p>
-        </>
-      ) : (
-        <p>{data.title}</p>
-      )}
+    <div className="tile" onClick={onClick}>
+      <img src={image} alt="Actor" />
     </div>
   );
-}
+};
 
 export default Tile;
