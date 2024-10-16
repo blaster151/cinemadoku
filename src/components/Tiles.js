@@ -14,7 +14,7 @@ function Tile({ id, type, data }) {
   return (
     <div
       ref={drag}
-      className={`tile ${type.toLowerCase()}`}
+      className={`loose-tile ${type.toLowerCase()}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
       {type === 'Actor' ? (

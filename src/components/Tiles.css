@@ -1,24 +1,35 @@
 .tiles-container {
-    width: 100%;
-    max-width: 550px; /* Slightly wider to accommodate 5 tiles */
-  }
-  
-  .tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    justify-content: center;
-  }
+  margin-top: 20px;
+}
 
-  .tiles-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .tile-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5px;
-  }
+.tiles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.loose-tile {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #333;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  cursor: move;
+}
+
+.loose-tile img {
+  max-width: 60%;
+  max-height: 60%;
+  object-fit: cover;
+}
+
+.loose-tile p {
+  margin: 5px 0 0;
+  text-align: center;
+  font-size: 12px;
+}

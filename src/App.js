@@ -42,23 +42,29 @@ function App() {
     toast.warn("Invalid tile placement!", { toastId: 'invalidDrop' });
   }, []);
 
+  const handleCheckSolution = useCallback((misplacedTiles) => {
+    if (misplacedTiles === 0) {
+      toast.success("Congratulations! All tiles are correctly placed!");
+    } else {
+      toast.warn(`So close! ${misplacedTiles} tile${misplacedTiles > 1 ? 's are' : ' is'} in the wrong place!`);
+    }
+  }, []);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <h1>My React Game</h1>
+          <h1>Movie-Actor Puzzle Game</h1>
         </header>
         <main className="App-main">
-          <div className="game-section">
-            <GameBoard 
-              boardTiles={boardTiles} 
-              onTilePlacement={handleTilePlacement}
-              onInvalidDrop={handleInvalidDrop}
-            />
-          </div>
-          <div className="tiles-section">
-            <Tiles tiles={tiles.filter(tile => !tile.isPlaced)} />
-          </div>
+          <GameBoard 
+            boardTiles={boardTiles} 
+            onTilePlacement={handleTilePlacement}
+            onInvalidDrop={handleInvalidDrop}
+            puzzle={demoPuzzles.find(p => p.id === currentPuzzleId)}
+            onCheckSolution={handleCheckSolution}
+          />
+          <Tiles tiles={tiles.filter(tile => !tile.isPlaced)} />
         </main>
         <div className="puzzle-selector">
           {[1, 2, 3].map(id => (

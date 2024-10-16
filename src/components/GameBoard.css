@@ -1,3 +1,9 @@
+.game-board-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .game-board {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -14,7 +20,11 @@
   align-items: center;
   font-size: 14px;
   position: relative;
-  background-color: #f0f0f0;
+}
+
+.cell.empty {
+  background-color: transparent;
+  border: none;
 }
 
 .cell-type {
@@ -37,7 +47,7 @@
 
 .tile img {
   max-width: 80%;
-  max-height: 60%;
+  max-height: 80%;
   object-fit: cover;
 }
 
@@ -55,10 +65,18 @@
   background-color: rgba(0, 0, 255, 0.2);
 }
 
-.cell.actor {
-  background-color: #e6f3ff;
+.check-solution-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.cell.movie {
-  background-color: #fff0e6;
+.check-solution-button:hover {
+  background-color: #45a049;
 }

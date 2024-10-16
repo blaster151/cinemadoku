@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import './GameBoard.css';
 
@@ -39,10 +39,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
       {placedTile && (
         <div className={`tile ${placedTile.type.toLowerCase()}`}>
           {placedTile.type === 'Actor' ? (
-            <>
-              <img src={`https://placekitten.com/50/50?image=${placedTile.id}`} alt={placedTile.data.name} />
-              <p>{placedTile.data.name}</p>
-            </>
+            <img src={`https://placekitten.com/50/50?image=${placedTile.id}`} alt={placedTile.data.name} />
           ) : (
             <p>{placedTile.data.title}</p>
           )}
@@ -52,7 +49,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
   );
 }
 
-function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop }) {
+function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheckSolution }) {
   const boardPattern = [
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
     ['Actor', null, 'Actor', null, 'Actor'],
@@ -62,6 +59,10 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop }) {
   ];
 
   const [tiles, setTiles] = useState(boardTiles);
+
+  useEffect(() => {
+    setTiles(boardTiles);
+  }, [boardTiles]);
 
   const handleSwap = useCallback((draggedTileId, targetRowIndex, targetCellIndex) => {
     setTiles(prevTiles => {
@@ -74,9 +75,10 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop }) {
       newTiles[draggedTilePosition] = newTiles[targetPosition];
       newTiles[targetPosition] = temp;
 
+      onTilePlacement(draggedTileId, targetRowIndex, targetCellIndex);
       return newTiles;
     });
-  }, []);
+  }, [onTilePlacement]);
 
   const handleDrop = useCallback((tileId, rowIndex, cellIndex) => {
     onTilePlacement(tileId, rowIndex, cellIndex);
@@ -86,22 +88,37 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop }) {
     }));
   }, [onTilePlacement, boardTiles]);
 
+  const handleCheckSolution = () => {
+    const misplacedTiles = Object.entries(tiles).reduce((count, [position, tile]) => {
+      const [row, col] = position.split('-').map(Number);
+      const correctTile = puzzle.solution[row][col];
+      return count + (tile && tile.id !== correctTile ? 1 : 0);
+    }, 0);
+
+    onCheckSolution(misplacedTiles);
+  };
+
   return (
-    <div className="game-board">
-      {boardPattern.map((row, rowIndex) => (
-        row.map((cellType, cellIndex) => (
-          <Cell
-            key={`${rowIndex}-${cellIndex}`}
-            type={cellType}
-            rowIndex={rowIndex}
-            cellIndex={cellIndex}
-            onDrop={handleDrop}
-            onInvalidDrop={onInvalidDrop}
-            onSwap={handleSwap}
-            placedTile={tiles[`${rowIndex}-${cellIndex}`]}
-          />
-        ))
-      ))}
+    <div className="game-board-container">
+      <div className="game-board">
+        {boardPattern.map((row, rowIndex) => (
+          row.map((cellType, cellIndex) => (
+            <Cell
+              key={`${rowIndex}-${cellIndex}`}
+              type={cellType}
+              rowIndex={rowIndex}
+              cellIndex={cellIndex}
+              onDrop={handleDrop}
+              onInvalidDrop={onInvalidDrop}
+              onSwap={handleSwap}
+              placedTile={tiles[`${rowIndex}-${cellIndex}`]}
+            />
+          ))
+        ))}
+      </div>
+      <button className="check-solution-button" onClick={handleCheckSolution}>
+        Check Solution
+      </button>
     </div>
   );
 }
