@@ -3,8 +3,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import GameBoard from './GameBoard';
-import Tiles from './Tiles';
+import GameBoard from './components/GameBoard';
+import Tiles from './components/Tiles';
 import { demoPuzzles } from './demoPuzzles';
 import './App.css';
 
@@ -39,7 +39,7 @@ function App() {
   }, [tiles]);
 
   const handleInvalidDrop = useCallback(() => {
-    toast.warn("Invalid tile placement!");
+    toast.warn("Invalid tile placement!", { toastId: 'invalidDrop' });
   }, []);
 
   return (

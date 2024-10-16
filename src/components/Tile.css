@@ -1,0 +1,25 @@
+.tile {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tile:not(.empty) {
+  border: 2px solid #333;
+  background-color: #f0f0f0;
+}
+
+.tile.empty {
+  background-color: transparent;
+}
+
+.loose-tile {
+  border: 2px solid #333;
+  background-color: #e0e0e0;
+}
