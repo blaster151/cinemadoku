@@ -17,28 +17,66 @@ function App() {
 
   useEffect(() => {
     const puzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
-    setTiles(puzzle.tiles.map(tile => ({ ...tile, isPlaced: false })));
+    
     const initialBoard = {};
     puzzle.initialPlacements.forEach(placement => {
       const tile = puzzle.tiles.find(t => t.id === placement.tileId);
       initialBoard[placement.position] = { ...tile, isPlaced: true };
     });
     setBoardTiles(initialBoard);
+
+    const initialTiles = puzzle.tiles.map((tile, index) => ({
+      ...tile,
+      originalSlot: index,
+      isPlaced: puzzle.initialPlacements.some(p => p.tileId === tile.id)
+    }));
+    setTiles(initialTiles);
   }, [currentPuzzleId]);
 
   const handleTilePlacement = useCallback((tileId, rowIndex, cellIndex) => {
     const placedTile = tiles.find(tile => tile.id === tileId);
     if (placedTile) {
-      setTiles(prevTiles => prevTiles.map(tile => 
+      setBoardTiles(prev => {
+        const newBoardTiles = { ...prev };
+        const existingPlacement = Object.entries(newBoardTiles).find(([_, tile]) => tile?.id === tileId);
+        
+        if (existingPlacement) {
+          const [oldPosition] = existingPlacement;
+          // If there's a tile in the target position, swap them
+          if (newBoardTiles[`${rowIndex}-${cellIndex}`]) {
+            const targetTile = newBoardTiles[`${rowIndex}-${cellIndex}`];
+            newBoardTiles[oldPosition] = targetTile;
+          } else {
+            // If no tile in target position, just remove from old position
+            delete newBoardTiles[oldPosition];
+          }
+        }
+        
+        // Place the dragged tile in the new position
+        newBoardTiles[`${rowIndex}-${cellIndex}`] = { ...placedTile, isPlaced: true };
+        
+        return newBoardTiles;
+      });
+
+      setTiles(prev => prev.map(tile => 
         tile.id === tileId ? { ...tile, isPlaced: true } : tile
       ));
-      setBoardTiles(prev => ({
-        ...prev,
-        [`${rowIndex}-${cellIndex}`]: { ...placedTile, isPlaced: true }
-      }));
-      toast.success("Tile placed successfully!");
     }
   }, [tiles]);
+
+  const handleTileRemoval = useCallback((tileId) => {
+    setBoardTiles(prev => {
+      const newBoardTiles = { ...prev };
+      const position = Object.entries(newBoardTiles).find(([_, tile]) => tile?.id === tileId)?.[0];
+      if (position) {
+        delete newBoardTiles[position];
+      }
+      return newBoardTiles;
+    });
+    setTiles(prev => prev.map(tile => 
+      tile.id === tileId ? { ...tile, isPlaced: false } : tile
+    ));
+  }, []);
 
   const handleInvalidDrop = useCallback(() => {
     toast.warn("Invalid tile placement!", { toastId: 'invalidDrop' });
@@ -58,6 +96,21 @@ function App() {
 
   const handleHintLeave = useCallback(() => {
     setActiveHintColor(null);
+  }, []);
+
+  const handleTileReturnToSlot = useCallback((tileId, slotIndex) => {
+    setBoardTiles(prev => {
+      const newBoardTiles = { ...prev };
+      const position = Object.entries(newBoardTiles).find(([_, tile]) => tile?.id === tileId)?.[0];
+      if (position) {
+        delete newBoardTiles[position];
+      }
+      return newBoardTiles;
+    });
+
+    setTiles(prev => prev.map(tile => 
+      tile.id === tileId ? { ...tile, isPlaced: false } : tile
+    ));
   }, []);
 
   const currentPuzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
@@ -85,8 +138,12 @@ function App() {
                 .map(hint => hint.color);
               return activeHintColor && cellHints.includes(activeHintColor);
             }}
+            onTileRemoval={handleTileRemoval}
           />
-          <Tiles tiles={tiles.filter(tile => !tile.isPlaced)} />
+          <Tiles 
+            tiles={tiles.filter(tile => !tile.isPlaced)}
+            onTileDrop={handleTileReturnToSlot}
+          />
           <Hints 
             hints={currentPuzzle.hints}
             onHintHover={handleHintHover}

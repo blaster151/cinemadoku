@@ -1,6 +1,33 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useDrop } from 'react-dnd';
+import { useDrop, useDrag } from 'react-dnd';
 import './GameBoard.css';
+
+function PlacedTile({ tile }) {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'tile',
+    item: { id: tile.id, type: tile.type, data: tile.data },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }), [tile]);
+
+  return (
+    <div
+      ref={drag}
+      className={`loose-tile ${tile.type.toLowerCase()}`}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      {tile.type === 'Actor' ? (
+        <>
+          <img src={`https://placekitten.com/50/50?image=${tile.id}`} alt={tile.data.name} />
+          <p>{tile.data.name}</p>
+        </>
+      ) : (
+        <p>{tile.data.title}</p>
+      )}
+    </div>
+  );
+}
 
 function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, onSwap, hintColors, isHighlighted, onHintHover, onHintLeave, activeHint }) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
@@ -37,15 +64,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
   return (
     <div ref={drop} className={`cell ${classNames}`}>
       {type && <span className="cell-type">{type}</span>}
-      {placedTile && (
-        <div className={`tile ${placedTile.type.toLowerCase()}`}>
-          {placedTile.type === 'Actor' ? (
-            <img src={`https://placekitten.com/50/50?image=${placedTile.id}`} alt={placedTile.data.name} />
-          ) : (
-            <p>{placedTile.data.title}</p>
-          )}
-        </div>
-      )}
+      {placedTile && <PlacedTile tile={placedTile} />}
       {hintColors.map((color, index) => (
         <div 
           key={index} 

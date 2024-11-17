@@ -18,9 +18,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .cell.empty {
@@ -34,32 +35,6 @@
   left: 5px;
   font-size: 12px;
   color: #666;
-}
-
-.tile {
-  width: 90%;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.tile img {
-  max-width: 70%;
-  max-height: 70%;
-  object-fit: cover;
-}
-
-.tile p {
-  margin: 5px 0 0;
-  text-align: center;
-  font-size: 12px;
-  width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .cell.is-over {
