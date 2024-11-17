@@ -12,24 +12,41 @@
 .loose-tile {
   width: 80px;
   height: 80px;
-  border: 2px solid #333;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
   cursor: move;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Movie tiles get a solid border */
+.loose-tile[class*="movie"] {
+  border: 3px solid #4a90e2;
+  border-radius: 5px;
+}
+
+/* Actor tiles get a dashed border */
+.loose-tile[class*="actor"] {
+  border: 3px dashed #e24a4a;
+  border-radius: 50%; /* Make actor tiles circular */
 }
 
 .loose-tile img {
   max-width: 60%;
   max-height: 60%;
   object-fit: cover;
+  border-radius: 50%; /* Make actor images circular */
 }
 
 .loose-tile p {
   margin: 5px 0 0;
   text-align: center;
   font-size: 12px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
