@@ -43,7 +43,18 @@
   cursor: move;
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 0.2s;
 }
+
+/* Cascading effect starts after initial delay */
+.tile-slot:nth-child(1) .loose-tile { animation-delay: 0.2s; }
+.tile-slot:nth-child(2) .loose-tile { animation-delay: 0.3s; }
+.tile-slot:nth-child(3) .loose-tile { animation-delay: 0.4s; }
+.tile-slot:nth-child(4) .loose-tile { animation-delay: 0.5s; }
+.tile-slot:nth-child(5) .loose-tile { animation-delay: 0.6s; }
+/* ... add more if needed ... */
 
 /* Movie tiles get a solid border */
 .loose-tile[class*="movie"] {
@@ -72,4 +83,39 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modify the fade-in animation to only apply to initial render */
+.tile-slot .loose-tile {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* Remove fade animation for placed tiles */
+.cell .loose-tile {
+  opacity: 1;
+  animation: none;
+}
+
+/* Add centering transition */
+.cell .loose-tile {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Maintain swap animation */
+.cell .loose-tile.swapping {
+  transform: translate(var(--swap-x, 0), var(--swap-y, 0));
 }
