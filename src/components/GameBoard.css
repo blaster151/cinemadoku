@@ -67,6 +67,7 @@
 
 .cell.highlighted {
   box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+  background-color: rgba(255, 255, 0, 0.1);
 }
 
 .hint-marker {
@@ -74,6 +75,13 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hint-marker:hover,
+.hint-marker.active {
+  transform: scale(1.2);
 }
 
 .hint-marker-0 { top: 5px; right: 5px; }

@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { useDrop } from 'react-dnd';
 import './GameBoard.css';
 
-function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, onSwap, hintColors, isHighlighted }) {
+function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, onSwap, hintColors, isHighlighted, onHintHover, onHintLeave, activeHint }) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'tile',
     drop: (item, monitor) => {
@@ -35,7 +35,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
   ].filter(Boolean).join(' ');
 
   return (
-    <div ref={drop} className={classNames}>
+    <div ref={drop} className={`cell ${classNames}`}>
       {type && <span className="cell-type">{type}</span>}
       {placedTile && (
         <div className={`tile ${placedTile.type.toLowerCase()}`}>
@@ -47,13 +47,29 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
         </div>
       )}
       {hintColors.map((color, index) => (
-        <div key={index} className={`hint-marker hint-marker-${index}`} style={{ backgroundColor: color }}></div>
+        <div 
+          key={index} 
+          className={`hint-marker hint-marker-${index} ${color === activeHint ? 'active' : ''}`} 
+          style={{ backgroundColor: color }}
+          onMouseEnter={() => onHintHover(color)}
+          onMouseLeave={onHintLeave}
+        />
       ))}
     </div>
   );
 }
 
-function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheckSolution, activeHint, hints }) {
+function GameBoard({ 
+  boardTiles, 
+  onTilePlacement, 
+  onInvalidDrop, 
+  puzzle, 
+  onCheckSolution, 
+  activeHint, 
+  hints,
+  onHintHover, 
+  onHintLeave
+}) {
   const boardPattern = [
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
     ['Actor', null, 'Actor', null, 'Actor'],
@@ -124,7 +140,10 @@ function GameBoard({ boardTiles, onTilePlacement, onInvalidDrop, puzzle, onCheck
               onSwap={handleSwap}
               placedTile={tiles[`${rowIndex}-${cellIndex}`]}
               hintColors={getHintColorsForCell(rowIndex, cellIndex)}
-              isHighlighted={activeHint && hints.find(h => h.id === activeHint)?.relatedTiles.includes(puzzle.solution[rowIndex][cellIndex])}
+              isHighlighted={activeHint && hints.find(h => h.color === activeHint)?.relatedTiles.includes(puzzle.solution[rowIndex][cellIndex])}
+              onHintHover={onHintHover}
+              onHintLeave={onHintLeave}
+              activeHint={activeHint}
             />
           ))
         ))}

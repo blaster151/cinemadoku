@@ -13,7 +13,7 @@ function App() {
   const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
   const [tiles, setTiles] = useState([]);
   const [boardTiles, setBoardTiles] = useState({});
-  const [activeHint, setActiveHint] = useState(null);
+  const [activeHintColor, setActiveHintColor] = useState(null);
 
   useEffect(() => {
     const puzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
@@ -52,12 +52,12 @@ function App() {
     }
   }, []);
 
-  const handleHintHover = useCallback((hintId) => {
-    setActiveHint(hintId);
+  const handleHintHover = useCallback((color) => {
+    setActiveHintColor(color);
   }, []);
 
   const handleHintLeave = useCallback(() => {
-    setActiveHint(null);
+    setActiveHintColor(null);
   }, []);
 
   const currentPuzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
@@ -75,14 +75,23 @@ function App() {
             onInvalidDrop={handleInvalidDrop}
             puzzle={currentPuzzle}
             onCheckSolution={handleCheckSolution}
-            activeHint={activeHint}
+            activeHint={activeHintColor}
             hints={currentPuzzle.hints}
+            onHintHover={handleHintHover}
+            onHintLeave={handleHintLeave}
+            isHighlighted={(rowIndex, cellIndex) => {
+              const cellHints = currentPuzzle.hints
+                .filter(hint => hint.relatedTiles.includes(currentPuzzle.solution[rowIndex][cellIndex]))
+                .map(hint => hint.color);
+              return activeHintColor && cellHints.includes(activeHintColor);
+            }}
           />
           <Tiles tiles={tiles.filter(tile => !tile.isPlaced)} />
           <Hints 
             hints={currentPuzzle.hints}
             onHintHover={handleHintHover}
             onHintLeave={handleHintLeave}
+            activeHint={activeHintColor}
           />
         </main>
         <div className="puzzle-selector">

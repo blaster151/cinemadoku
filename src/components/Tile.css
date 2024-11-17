@@ -1,13 +1,20 @@
 .tile {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid #333;
+  background-color: #f0f0f0;
+}
+
+.tile p {
+  margin: 0;
+  text-align: center;
 }
 
 .tile:not(.empty) {
