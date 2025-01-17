@@ -145,3 +145,32 @@
 .loose-tile[class*="movie"] img {
   transform: none;
 }
+
+/* Hint panel styles */
+.hints-container {
+  width: 300px;
+  min-height: 200px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hint-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hint-list-item {
+  text-align: left;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Keep existing hint-related styles */
