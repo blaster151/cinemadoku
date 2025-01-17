@@ -104,18 +104,28 @@
   white-space: normal;
 }
 
-/* Actor image gets pushed up */
+/* Actor image styles */
 .loose-tile[class*="actor"] img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 4px;
   transform: translateY(-5px);
+  opacity: 1;
+}
+
+/* Keep the transition only for loading */
+.loose-tile[class*="actor"] img:not(.loaded) {
   opacity: 0;
   transition: opacity 0.75s ease-in;
 }
 
-/* Movie image stays centered */
+/* When loaded, show immediately */
+.loose-tile[class*="actor"] img.loaded {
+  opacity: 1;
+}
+
+/* Movie image stays centered and visible */
 .loose-tile .movie-image {
   width: 100%;
   height: 100%;
