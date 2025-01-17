@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ActorImage from './ActorImage';
+import MovieTile from './MovieTile';
 import './Tiles.css';
 
 function Tile({ id, type, data }) {
@@ -30,7 +31,7 @@ function Tile({ id, type, data }) {
           <p>{data.name}</p>
         </>
       ) : (
-        <p>{data.title}</p>
+        <MovieTile title={data.title} />
       )}
     </div>
   );
