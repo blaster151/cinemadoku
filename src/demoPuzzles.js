@@ -97,98 +97,97 @@ export const demoPuzzles = [
     },
     {
       id: 2,
-      name: "Modern Blockbusters",
+      name: "Modern Cinema",
       tiles: [
-        { id: 0, type: "Actor", data: { name: "Robert Downey Jr.", birthYear: 1965, birthplace: "Manhattan, New York, USA" } },
-        { id: 1, type: "Movie", data: { title: "Iron Man", releaseYear: 2008, director: "Jon Favreau" } },
-        { id: 2, type: "Actor", data: { name: "Chris Evans", birthYear: 1981, birthplace: "Boston, Massachusetts, USA" } },
-        { id: 3, type: "Movie", data: { title: "Captain America: The First Avenger", releaseYear: 2011, director: "Joe Johnston" } },
-        { id: 4, type: "Actor", data: { name: "Scarlett Johansson", birthYear: 1984, birthplace: "Manhattan, New York, USA" } },
-        { id: 5, type: "Movie", data: { title: "Black Widow", releaseYear: 2021, director: "Cate Shortland" } },
-        { id: 6, type: "Actor", data: { name: "Chris Hemsworth", birthYear: 1983, birthplace: "Melbourne, Australia" } },
-        { id: 7, type: "Movie", data: { title: "Thor", releaseYear: 2011, director: "Kenneth Branagh" } },
-        { id: 8, type: "Actor", data: { name: "Mark Ruffalo", birthYear: 1967, birthplace: "Kenosha, Wisconsin, USA" } },
-        { id: 9, type: "Movie", data: { title: "The Avengers", releaseYear: 2012, director: "Joss Whedon" } },
-        { id: 10, type: "Actor", data: { name: "Tom Holland", birthYear: 1996, birthplace: "Kingston upon Thames, England" } },
-        { id: 11, type: "Movie", data: { title: "Spider-Man: Homecoming", releaseYear: 2017, director: "Jon Watts" } },
-        { id: 12, type: "Actor", data: { name: "Chadwick Boseman", birthYear: 1976, birthplace: "Anderson, South Carolina, USA" } },
-        { id: 13, type: "Movie", data: { title: "Black Panther", releaseYear: 2018, director: "Ryan Coogler" } },
-        { id: 14, type: "Actor", data: { name: "Brie Larson", birthYear: 1989, birthplace: "Sacramento, California, USA" } },
-        { id: 15, type: "Movie", data: { title: "Captain Marvel", releaseYear: 2019, director: "Anna Boden, Ryan Fleck" } },
-        { id: 16, type: "Actor", data: { name: "Benedict Cumberbatch", birthYear: 1976, birthplace: "London, England" } },
-        { id: 17, type: "Movie", data: { title: "Doctor Strange", releaseYear: 2016, director: "Scott Derrickson" } },
-        { id: 18, type: "Actor", data: { name: "Elizabeth Olsen", birthYear: 1989, birthplace: "Sherman Oaks, California, USA" } },
-        { id: 19, type: "Movie", data: { title: "WandaVision", releaseYear: 2021, director: "Matt Shakman" } },
-        { id: 20, type: "Actor", data: { name: "Paul Rudd", birthYear: 1969, birthplace: "Passaic, New Jersey, USA" } },
+        { id: 0, type: "Actor", data: { name: "Bill Hader", birthYear: 1978, birthplace: "Tulsa, Oklahoma, USA" } },
+        { id: 1, type: "Movie", data: { title: "Barry", releaseYear: 2018, director: "Bill Hader, Alec Berg" } },
+        { id: 2, type: "Actor", data: { name: "Stephen Root", birthYear: 1951, birthplace: "Sarasota, Florida, USA" } },
+        { id: 3, type: "Movie", data: { title: "Office Space", releaseYear: 1999, director: "Mike Judge" } },
+        { id: 4, type: "Actor", data: { name: "Zendaya", birthYear: 1996, birthplace: "Oakland, California, USA" } },
+        { id: 5, type: "Movie", data: { title: "Dune", releaseYear: 2021, director: "Denis Villeneuve" } },
+        { id: 6, type: "Actor", data: { name: "Tom Cruise", birthYear: 1962, birthplace: "Syracuse, New York, USA" } },
+        { id: 7, type: "Movie", data: { title: "Top Gun: Maverick", releaseYear: 2022, director: "Joseph Kosinski" } },
+        { id: 8, type: "Actor", data: { name: "Florence Pugh", birthYear: 1996, birthplace: "Oxford, England" } },
+        { id: 9, type: "Movie", data: { title: "Black Widow", releaseYear: 2021, director: "Cate Shortland" } },
+        { id: 10, type: "Actor", data: { name: "Oscar Isaac", birthYear: 1979, birthplace: "Guatemala City, Guatemala" } },
+        { id: 11, type: "Movie", data: { title: "Moon Knight", releaseYear: 2022, director: "Mohamed Diab" } },
+        { id: 12, type: "Actor", data: { name: "Denzel Washington", birthYear: 1962, birthplace: "Ipoh, Malaysia" } },
+        { id: 13, type: "Movie", data: { title: "Everything Everywhere All at Once", releaseYear: 2022, director: "Daniels" } },
+        { id: 14, type: "Actor", data: { name: "Jodie Foster", birthYear: 1975, birthplace: "Santiago, Chile" } },
+        { id: 15, type: "Movie", data: { title: "The Last of Us", releaseYear: 2023, director: "Various" } },
+        { id: 16, type: "Actor", data: { name: "Ryan Gosling", birthYear: 1990, birthplace: "Gold Coast, Australia" } },
+        { id: 17, type: "Movie", data: { title: "Barbie", releaseYear: 2023, director: "Greta Gerwig" } },
+        { id: 18, type: "Actor", data: { name: "Daniel Day-Lewis", birthYear: 1976, birthplace: "Cork, Ireland" } },
+        { id: 19, type: "Movie", data: { title: "Oppenheimer", releaseYear: 2023, director: "Christopher Nolan" } }
       ],
       initialPlacements: [
         { tileId: 1, position: "0-0" },
-        { tileId: 0, position: "0-1" },
+        { tileId: 0, position: "0-1" }
       ],
       solution: [
         [1, 0, 3, 2, 5],
         [4, null, 7, null, 6],
         [9, 8, 11, 10, 13],
         [12, null, 15, null, 14],
-        [17, 16, 19, 18, 20]
+        [17, 16, 19, 18, null]
       ],
       hints: [
         {
           id: 1,
-          text: "Voiced animated characters",
-          color: "#FF5733",
-          relatedTiles: [0, 4, 16],
-          longerDescription: "Robert Downey Jr. voiced Mr. Peabody in 'Mr. Peabody & Sherman' (2014), Scarlett Johansson voiced Ash in 'Sing' (2016), and Benedict Cumberbatch voiced Shere Khan in 'Mowgli: Legend of the Jungle' (2018)."
+          text: "Summer 2023 Blockbusters",
+          color: "#FF0000",
+          relatedTiles: [17, 19],
+          longerDescription: "Both 'Barbie' and 'Oppenheimer' were released in summer 2023, creating the cultural phenomenon known as 'Barbenheimer' and breaking box office records."
         },
         {
           id: 2,
-          text: "Performed own stunts",
-          color: "#33FF57",
-          relatedTiles: [6, 10],
-          longerDescription: "Both Chris Hemsworth and Tom Holland are known for performing many of their own stunts in the Marvel films. Hemsworth did extensive stunt work in 'Thor: Ragnarok', while Holland, a former gymnast, performs many of Spider-Man's acrobatics."
+          text: "Acclaimed Directors",
+          color: "#00FF00",
+          relatedTiles: [17, 19],
+          longerDescription: "Greta Gerwig ('Barbie') and Christopher Nolan ('Oppenheimer') are both highly acclaimed directors known for their unique visual styles and storytelling approaches."
         },
         {
           id: 3,
-          text: "Appeared in Black Mirror",
-          color: "#3357FF",
-          relatedTiles: [12, 14],
-          longerDescription: "Both Chadwick Boseman and Brie Larson appeared in episodes of the sci-fi series 'Black Mirror'. Boseman starred in the episode 'Black Museum', while Larson appeared in the episode 'USS Callister'."
+          text: "TV to Film Transitions",
+          color: "#0000FF",
+          relatedTiles: [0, 2],
+          longerDescription: "Both Bill Hader and Stephen Root started in television (SNL and NewsRadio respectively) before transitioning to significant film roles."
         },
         {
           id: 4,
-          text: "Siblings in MCU",
-          color: "#FF33F1",
-          relatedTiles: [6, 18],
-          longerDescription: "Chris Hemsworth's brother Luke appeared as an actor playing Thor in 'Thor: Ragnarok'. Elizabeth Olsen's sisters, Mary-Kate and Ashley, had a cameo reference in 'Avengers: Age of Ultron' when Scarlet Witch mentions 'twins'."
+          text: "Franchise Stars",
+          color: "#FFA500",
+          relatedTiles: [4, 6],
+          longerDescription: "Zendaya (Spider-Man, Dune) and Tom Cruise (Mission: Impossible, Top Gun) are both stars of major film franchises."
         },
         {
           id: 5,
-          text: "Body transformations for roles",
-          color: "#33FFF1",
-          relatedTiles: [0, 14],
-          longerDescription: "Robert Downey Jr. underwent significant physical training to portray Tony Stark/Iron Man, while Brie Larson engaged in intense workouts, including pushing a 5,000-pound Jeep, to prepare for her role as Captain Marvel."
+          text: "Breakout Roles",
+          color: "#800080",
+          relatedTiles: [8, 10],
+          longerDescription: "Florence Pugh (Lady Macbeth) and Oscar Isaac (Inside Llewyn Davis) both had critically acclaimed breakout performances that launched their careers."
         },
         {
           id: 6,
-          text: "Same first name",
-          color: "#FFF133",
-          relatedTiles: [2, 6],
-          longerDescription: "Both Chris Evans and Chris Hemsworth share the first name 'Chris'. This has been a source of humor among Marvel fans and even the actors themselves, often jokingly referred to as the 'Chris Club' in the MCU."
+          text: "Superhero Universe Actors",
+          color: "#008080",
+          relatedTiles: [8, 10],
+          longerDescription: "Florence Pugh (Black Widow) and Oscar Isaac (Moon Knight) both play significant roles in the Marvel Cinematic Universe."
         },
         {
           id: 7,
-          text: "TV series spin-offs",
-          color: "#8B33FF",
-          relatedTiles: [15, 19],
-          longerDescription: "Both 'Captain Marvel' and 'WandaVision' have connections to TV series spin-offs. 'Captain Marvel' will have a spin-off series featuring Ms. Marvel, while 'WandaVision' itself is a TV series spin-off from the Avengers films."
+          text: "Award Season Buzz",
+          color: "#FFD700",
+          relatedTiles: [17, 19],
+          longerDescription: "Both 'Barbie' and 'Oppenheimer' generated significant awards season buzz and received multiple nominations across various ceremonies."
         },
         {
           id: 8,
-          text: "Appeared in non-MCU superhero films",
-          color: "#FF3333",
-          relatedTiles: [0, 2],
-          longerDescription: "Before joining the MCU, Robert Downey Jr. played the title role in 'Iron Man' (2008), which kicked off the MCU. Chris Evans previously played the Human Torch in the 'Fantastic Four' films (2005 and 2007) before becoming Captain America."
-        },
+          text: "Based on Existing Properties",
+          color: "#4B0082",
+          relatedTiles: [5, 15],
+          longerDescription: "'Dune' is based on Frank Herbert's classic novel, while 'The Last of Us' is adapted from the acclaimed video game of the same name."
+        }
       ]
     },
     {

@@ -36,25 +36,14 @@
   width: 80px;
   height: 80px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f0f0f0;
   cursor: move;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
-  animation-delay: 0.2s;
+  padding: 1px;
 }
-
-/* Cascading effect starts after initial delay */
-.tile-slot:nth-child(1) .loose-tile { animation-delay: 0.2s; }
-.tile-slot:nth-child(2) .loose-tile { animation-delay: 0.3s; }
-.tile-slot:nth-child(3) .loose-tile { animation-delay: 0.4s; }
-.tile-slot:nth-child(4) .loose-tile { animation-delay: 0.5s; }
-.tile-slot:nth-child(5) .loose-tile { animation-delay: 0.6s; }
-/* ... add more if needed ... */
 
 /* Movie tiles get a solid border */
 .loose-tile[class*="movie"] {
@@ -62,60 +51,40 @@
   border-radius: 5px;
 }
 
-/* Actor tiles get a dashed border */
+/* Actor tiles get a different colored border */
 .loose-tile[class*="actor"] {
-  border: 3px dashed #e24a4a;
-  border-radius: 50%; /* Make actor tiles circular */
+  border: 3px solid #e24a4a;
+  border-radius: 5px;
 }
 
 .loose-tile img {
-  max-width: 60%;
-  max-height: 60%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 50%; /* Make actor images circular */
+  border-radius: 4px;
+  transform: translateY(-5px);
+  opacity: 0;
+  transition: opacity 0.75s ease-in;
+}
+
+.loose-tile img.loaded {
+  opacity: 1;
 }
 
 .loose-tile p {
-  margin: 5px 0 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 2px 4px;
   text-align: center;
-  font-size: 12px;
-  width: 90%;
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Modify the fade-in animation to only apply to initial render */
-.tile-slot .loose-tile {
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
-}
-
-/* Remove fade animation for placed tiles */
-.cell .loose-tile {
-  opacity: 1;
-  animation: none;
-}
-
-/* Add centering transition */
-.cell .loose-tile {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Maintain swap animation */
-.cell .loose-tile.swapping {
-  transform: translate(var(--swap-x, 0), var(--swap-y, 0));
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
 }

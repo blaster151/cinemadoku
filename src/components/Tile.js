@@ -1,15 +1,20 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
-import './Tile.css';
 
 function Tile({ id, type, data, isPlaced }) {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'tile',
+    type: 'TILE',
     item: { id, type, data },
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: monitor.isDragging(),
     }),
   }), [id, type, data]);
+
+  // Simplified image path construction
+  const imagePath = type === 'Actor' ? `/images/${data.name}.png` : null;
+
+  // Debug log to see what IDs we're getting
+  console.log('Rendering tile:', id, type, data.name || data.title);
 
   return (
     <div
@@ -17,12 +22,20 @@ function Tile({ id, type, data, isPlaced }) {
       className={`loose-tile ${type.toLowerCase()}`}
       style={{ 
         opacity: isDragging ? 0.5 : 1,
-        cursor: 'move'
+        cursor: 'move',
       }}
+      // Add data attributes for debugging
+      data-tile-id={id}
+      data-tile-type={type}
     >
       {type === 'Actor' ? (
         <>
-          <img src={`https://placekitten.com/50/50?image=${id}`} alt={data.name} />
+          <img 
+            src={imagePath}
+            alt={data.name}
+            onLoad={() => console.log('Image loaded:', imagePath)}
+            onError={() => console.log('Image failed to load:', imagePath)}
+          />
           <p>{data.name}</p>
         </>
       ) : (

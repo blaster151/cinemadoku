@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import './Tiles.css';
 
@@ -11,6 +11,8 @@ function Tile({ id, type, data }) {
     }),
   }));
 
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
   return (
     <div
       ref={drag}
@@ -19,7 +21,16 @@ function Tile({ id, type, data }) {
     >
       {type === 'Actor' ? (
         <>
-          <img src={`https://placekitten.com/50/50?image=${id}`} alt={data.name} />
+          <img 
+            src={`/images/${data.name}.png`}
+            alt={data.name}
+            className={imageLoaded ? 'loaded' : ''}
+            onLoad={() => setImageLoaded(true)}
+            onError={(e) => {
+              console.log('Failed to load image:', data.name);
+              e.target.style.display = 'none';
+            }}
+          />
           <p>{data.name}</p>
         </>
       ) : (
@@ -49,14 +60,16 @@ function TileSlot({ index, tile, onTileDrop }) {
 }
 
 function Tiles({ tiles, onTileDrop }) {
-  // First, create a dense layout for initial unplaced tiles
-  const unplacedTiles = tiles.filter(t => !t.isPlaced);
+  const unplacedTiles = useMemo(() => 
+    tiles.filter(t => !t.isPlaced),
+    [tiles]
+  );
   
-  // Track the initial position in the loose tiles area
-  const [initialPositions, setInitialPositions] = React.useState({});
+  const [initialPositions, setInitialPositions] = useState({});
 
-  React.useEffect(() => {
-    if (unplacedTiles.length > 0 && Object.keys(initialPositions).length === 0) {
+  // Reset positions when puzzle changes
+  useEffect(() => {
+    if (unplacedTiles.length > 0) {
       setInitialPositions(
         unplacedTiles.reduce((acc, tile, index) => {
           acc[tile.id] = index;
@@ -64,17 +77,26 @@ function Tiles({ tiles, onTileDrop }) {
         }, {})
       );
     }
-  }, [unplacedTiles, initialPositions]);
+    
+    // Cleanup when puzzle changes
+    return () => setInitialPositions({});
+  }, [unplacedTiles]); // Changed from checking length to watching unplacedTiles
   
-  // Create slots array with length of total initial unplaced tiles
-  const slots = Array(Math.max(Object.keys(initialPositions).length, unplacedTiles.length)).fill(null).map((_, index) => {
-    // Find the tile that was initially assigned this position
-    const tile = unplacedTiles.find(t => initialPositions[t.id] === index);
-    return {
-      index: tile?.originalSlot || index,
-      tile: tile
-    };
-  });
+  const slots = useMemo(() => 
+    Array(Math.max(Object.keys(initialPositions).length, unplacedTiles.length))
+      .fill(null)
+      .map((_, index) => {
+        const tile = unplacedTiles.find(t => initialPositions[t.id] === index);
+        return {
+          index: tile?.originalSlot || index,
+          tile: tile
+        };
+      }),
+    [initialPositions, unplacedTiles]
+  );
+
+  // Get puzzleId from the first tile (they'll all be from the same puzzle)
+  const puzzleId = tiles[0]?.puzzleId;
 
   return (
     <div className="tiles-container">
@@ -82,7 +104,7 @@ function Tiles({ tiles, onTileDrop }) {
       <div className="tiles-grid">
         {slots.map(({ index, tile }) => (
           <TileSlot 
-            key={index} 
+            key={tile ? `puzzle${puzzleId}-tile${tile.id}` : `puzzle${puzzleId}-empty-slot-${index}`}
             index={index} 
             tile={tile} 
             onTileDrop={onTileDrop}

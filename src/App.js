@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import Tiles from './components/Tiles';
 import Hints from './components/Hints';
 import { demoPuzzles } from './demoPuzzles';
 import './App.css';
+import { useImagePreloader } from './hooks/useImagePreloader';
 
 function App() {
   const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
@@ -15,23 +16,37 @@ function App() {
   const [boardTiles, setBoardTiles] = useState({});
   const [activeHintColor, setActiveHintColor] = useState(null);
 
+  const currentPuzzle = useMemo(() => 
+    demoPuzzles.find(p => p.id === currentPuzzleId),
+    [currentPuzzleId]
+  );
+
+  useImagePreloader(currentPuzzle);
+
   useEffect(() => {
-    const puzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
+    if (!currentPuzzle) return;
     
     const initialBoard = {};
-    puzzle.initialPlacements.forEach(placement => {
-      const tile = puzzle.tiles.find(t => t.id === placement.tileId);
+    currentPuzzle.initialPlacements.forEach(placement => {
+      const tile = currentPuzzle.tiles.find(t => t.id === placement.tileId);
       initialBoard[placement.position] = { ...tile, isPlaced: true };
     });
     setBoardTiles(initialBoard);
 
-    const initialTiles = puzzle.tiles.map((tile, index) => ({
+    const initialTiles = currentPuzzle.tiles.map((tile, index) => ({
       ...tile,
       originalSlot: index,
-      isPlaced: puzzle.initialPlacements.some(p => p.tileId === tile.id)
+      isPlaced: currentPuzzle.initialPlacements.some(p => p.tileId === tile.id),
+      puzzleId: currentPuzzleId
     }));
     setTiles(initialTiles);
-  }, [currentPuzzleId]);
+
+    return () => {
+      setBoardTiles({});
+      setTiles([]);
+      setActiveHintColor(null);
+    };
+  }, [currentPuzzleId, currentPuzzle]);
 
   const handleTilePlacement = useCallback((tileId, rowIndex, cellIndex) => {
     const placedTile = tiles.find(tile => tile.id === tileId);
@@ -113,13 +128,16 @@ function App() {
     ));
   }, []);
 
-  const currentPuzzle = demoPuzzles.find(p => p.id === currentPuzzleId);
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <h1>Movie-Actor Puzzle Game</h1>
+          <h1>Movie Connection Puzzle</h1>
+          <div className="puzzle-selector">
+            <button onClick={() => setCurrentPuzzleId(1)}>Puzzle 1</button>
+            <button onClick={() => setCurrentPuzzleId(2)}>Puzzle 2</button>
+            <button onClick={() => setCurrentPuzzleId(3)}>Puzzle 3</button>
+          </div>
         </header>
         <main className="App-main">
           <GameBoard 
@@ -139,10 +157,12 @@ function App() {
               return activeHintColor && cellHints.includes(activeHintColor);
             }}
             onTileRemoval={handleTileRemoval}
+            puzzleId={currentPuzzleId}
           />
           <Tiles 
             tiles={tiles.filter(tile => !tile.isPlaced)}
             onTileDrop={handleTileReturnToSlot}
+            puzzleId={currentPuzzleId}
           />
           <Hints 
             hints={currentPuzzle.hints}
@@ -151,13 +171,6 @@ function App() {
             activeHint={activeHintColor}
           />
         </main>
-        <div className="puzzle-selector">
-          {[1, 2, 3].map(id => (
-            <button key={id} onClick={() => setCurrentPuzzleId(id)}>
-              Puzzle {id}
-            </button>
-          ))}
-        </div>
         <ToastContainer position="bottom-right" autoClose={3000} />
       </div>
     </DndProvider>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import './GameBoard.css';
 
@@ -11,6 +11,8 @@ function PlacedTile({ tile }) {
     }),
   }), [tile]);
 
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
   return (
     <div
       ref={drag}
@@ -19,7 +21,16 @@ function PlacedTile({ tile }) {
     >
       {tile.type === 'Actor' ? (
         <>
-          <img src={`https://placekitten.com/50/50?image=${tile.id}`} alt={tile.data.name} />
+          <img 
+            src={`/images/${tile.data.name}.png`}
+            alt={tile.data.name}
+            className={imageLoaded ? 'loaded' : ''}
+            onLoad={() => setImageLoaded(true)}
+            onError={(e) => {
+              console.log('Failed to load image:', tile.data.name);
+              e.target.style.display = 'none';
+            }}
+          />
           <p>{tile.data.name}</p>
         </>
       ) : (
@@ -101,22 +112,12 @@ function Cell({ type, rowIndex, cellIndex, onDrop, placedTile, onInvalidDrop, on
     >
       {type && <span className="cell-type">{type}</span>}
       {placedTile && (
-        <div 
-          className={`loose-tile ${placedTile.type.toLowerCase()} ${isAnimating ? 'animating' : ''}`}
-          style={{
-            ...tileStyle,
-            position: 'absolute',
-            transition: isAnimating ? 'none' : 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
-          }}
-        >
-          {placedTile.type === 'Actor' ? (
-            <>
-              <img src={`https://placekitten.com/50/50?image=${placedTile.id}`} alt={placedTile.data.name} />
-              <p>{placedTile.data.name}</p>
-            </>
-          ) : (
-            <p>{placedTile.data.title}</p>
-          )}
+        <div style={{
+          position: 'absolute',
+          ...tileStyle,
+          transition: isAnimating ? 'none' : 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+        }}>
+          <PlacedTile tile={placedTile} />
         </div>
       )}
       {hintColors.map((color, index) => (
@@ -143,27 +144,28 @@ function GameBoard({
   onHintHover, 
   onHintLeave
 }) {
-  const boardPattern = [
+  const boardPattern = useMemo(() => [
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
     ['Actor', null, 'Actor', null, 'Actor'],
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
     ['Actor', null, 'Actor', null, 'Actor'],
     ['Movie', 'Actor', 'Movie', 'Actor', 'Movie']
-  ];
+  ], []);
 
   const [tiles, setTiles] = useState(boardTiles);
 
   useEffect(() => {
     setTiles(boardTiles);
+    return () => setTiles({});
   }, [boardTiles]);
 
   const handleSwap = useCallback((draggedTileId, targetRowIndex, targetCellIndex) => {
     setTiles(prevTiles => {
       const newTiles = { ...prevTiles };
-      const draggedTilePosition = Object.entries(newTiles).find(([_, tile]) => tile.id === draggedTileId)[0];
-      const targetPosition = `${targetRowIndex}-${targetCellIndex}`;
+      const draggedTilePosition = Object.entries(newTiles).find(([_, tile]) => tile.id === draggedTileId)?.[0];
+      if (!draggedTilePosition) return prevTiles;
       
-      // Swap the tiles
+      const targetPosition = `${targetRowIndex}-${targetCellIndex}`;
       const temp = newTiles[draggedTilePosition];
       newTiles[draggedTilePosition] = newTiles[targetPosition];
       newTiles[targetPosition] = temp;
@@ -182,11 +184,12 @@ function GameBoard({
   }, [onTilePlacement, boardTiles]);
 
   const getHintColorsForCell = useCallback((rowIndex, cellIndex) => {
+    if (!puzzle?.solution) return [];
     const tileId = puzzle.solution[rowIndex][cellIndex];
     return hints
       .filter(hint => hint.relatedTiles.includes(tileId))
       .map(hint => hint.color);
-  }, [puzzle.solution, hints]);
+  }, [puzzle?.solution, hints]);
 
   const handleCheckSolution = () => {
     const misplacedTiles = Object.entries(tiles).reduce((count, [position, tile]) => {
@@ -204,7 +207,7 @@ function GameBoard({
         {boardPattern.map((row, rowIndex) => (
           row.map((cellType, cellIndex) => (
             <Cell
-              key={`${rowIndex}-${cellIndex}`}
+              key={`puzzle${puzzle.id}-cell${rowIndex}-${cellIndex}-tile${boardTiles[`${rowIndex}-${cellIndex}`]?.id || 'empty'}`}
               type={cellType}
               rowIndex={rowIndex}
               cellIndex={cellIndex}
