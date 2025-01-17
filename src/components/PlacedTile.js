@@ -22,6 +22,7 @@ function PlacedTile({ tile }) {
       {tile.type === 'Actor' ? (
         <>
           <ActorImage 
+            key={`placed-${tile.id}`}
             name={tile.data.name}
             onLoad={() => setImageLoaded(true)}
             className={imageLoaded ? 'loaded' : ''}

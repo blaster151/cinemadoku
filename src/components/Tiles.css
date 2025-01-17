@@ -57,7 +57,8 @@
   border-radius: 5px;
 }
 
-.loose-tile img {
+/* Fade-in effect only for tiles in the selection area */
+.tiles-grid .loose-tile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -67,7 +68,17 @@
   transition: opacity 0.75s ease-in;
 }
 
-.loose-tile img.loaded {
+.tiles-grid .loose-tile img.loaded {
+  opacity: 1;
+}
+
+/* Placed tiles on the board should always be visible */
+.game-board .loose-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  transform: translateY(-5px);
   opacity: 1;
 }
 
