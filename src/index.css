@@ -1,10 +1,25 @@
+/* Font fallback system */
+@font-face {
+  font-family: 'Abel';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;  /* This prevents FOUT (Flash of Unstyled Text) */
+  src: local('Abel');
+}
+
+/* Apply font sitewide */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Abel', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure all text elements inherit the font */
+h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea {
+  font-family: inherit;
 }
 
 code {
