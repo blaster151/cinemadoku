@@ -1,5 +1,6 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import ActorImage from './ActorImage';
 import './Tiles.css';
 
 function Tile({ id, type, data }) {
@@ -11,7 +12,7 @@ function Tile({ id, type, data }) {
     }),
   }));
 
-  const [imageLoaded, setImageLoaded] = React.useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <div
@@ -21,15 +22,10 @@ function Tile({ id, type, data }) {
     >
       {type === 'Actor' ? (
         <>
-          <img 
-            src={`/images/${data.name}.png`}
-            alt={data.name}
-            className={imageLoaded ? 'loaded' : ''}
+          <ActorImage 
+            name={data.name}
             onLoad={() => setImageLoaded(true)}
-            onError={(e) => {
-              console.log('Failed to load image:', data.name);
-              e.target.style.display = 'none';
-            }}
+            className={imageLoaded ? 'loaded' : ''}
           />
           <p>{data.name}</p>
         </>
