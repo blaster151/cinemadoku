@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
 
-function LooseTile({ tile }) {
+function PlacedTile({ tile }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'tile',
     item: { id: tile.id, type: tile.type, data: tile.data },
@@ -35,4 +35,4 @@ function LooseTile({ tile }) {
   );
 }
 
-export default LooseTile;
+export default PlacedTile;

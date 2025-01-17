@@ -97,13 +97,27 @@ function App() {
     toast.warn("Invalid tile placement!", { toastId: 'invalidDrop' });
   }, []);
 
-  const handleCheckSolution = useCallback((misplacedTiles) => {
-    if (misplacedTiles === 0) {
-      toast.success("Congratulations! All tiles are correctly placed!");
-    } else {
-      toast.warn(`So close! ${misplacedTiles} tile${misplacedTiles > 1 ? 's are' : ' is'} in the wrong place!`);
+  const handleCheckSolution = (misplacedTiles) => {
+    if (misplacedTiles === -1) {
+      toast.warning("Please place all tiles before checking your solution!", {
+        position: "bottom-right",
+        autoClose: 3000
+      });
+      return;
     }
-  }, []);
+    
+    if (misplacedTiles === 0) {
+      toast.success("Congratulations! All tiles are in the correct position!", {
+        position: "bottom-right",
+        autoClose: 3000
+      });
+    } else {
+      toast.info(`Almost there! ${misplacedTiles} tile${misplacedTiles > 1 ? 's are' : ' is'} in the wrong position.`, {
+        position: "bottom-right",
+        autoClose: 3000
+      });
+    }
+  };
 
   const handleHintHover = useCallback((color) => {
     setActiveHintColor(color);
@@ -164,12 +178,14 @@ function App() {
             onTileDrop={handleTileReturnToSlot}
             puzzleId={currentPuzzleId}
           />
-          <Hints 
-            hints={currentPuzzle.hints}
-            onHintHover={handleHintHover}
-            onHintLeave={handleHintLeave}
-            activeHint={activeHintColor}
-          />
+          {currentPuzzle?.hints && (
+            <Hints 
+              hints={currentPuzzle.hints}
+              onHintHover={handleHintHover}
+              onHintLeave={handleHintLeave}
+              activeHint={activeHintColor}
+            />
+          )}
         </main>
         <ToastContainer position="bottom-right" autoClose={3000} />
       </div>

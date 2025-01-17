@@ -1,7 +1,11 @@
 import React from 'react';
 import './Hints.css';
 
-function Hints({ hints, onHintHover, onHintLeave, activeHint }) {
+function Hints({ hints = [], onHintHover, onHintLeave, activeHint }) {
+  if (!Array.isArray(hints) || hints.length === 0) {
+    return null;
+  }
+
   return (
     <div className="hints-container">
       <h2>Hints</h2>
