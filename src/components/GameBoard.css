@@ -1,3 +1,12 @@
+.game-title {
+  font-size: 48px;
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
 .game-board-container {
   display: flex;
   flex-direction: column;
@@ -132,6 +141,9 @@
   border-radius: 4px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-weight: bold;
 }
 
 /* Only push up actor images, both in loose tiles and placed tiles */
@@ -146,7 +158,22 @@
   transform: none;
 }
 
-/* Hint panel styles */
+/* Hint panel styles with more specific selector */
+.hints-container .hint-list .hint-list-item {
+  text-align: left;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-weight: bold !important;  /* Made more forceful */
+}
+
+/* Keep existing hint-related styles */
+
+/* Update hint styles to match component classes */
 .hints-container {
   width: 300px;
   min-height: 200px;
@@ -156,13 +183,13 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.hint-list {
+.hints-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.hint-list-item {
+.hint-item {  /* Changed from hint-list-item */
   text-align: left;
   padding: 10px;
   margin: 5px 0;
@@ -171,6 +198,10 @@
   transition: transform 0.2s ease;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  font-weight: bold !important;
 }
 
-/* Keep existing hint-related styles */
+/* Make the selector even more specific if needed */
+.hints-container .hints-list .hint-item {
+  font-weight: bold !important;
+}

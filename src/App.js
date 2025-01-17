@@ -146,7 +146,7 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <h1>Movie Connection Puzzle</h1>
+          <h1 className="game-title">Cinemadoku</h1>
           <div className="puzzle-selector">
             <button onClick={() => setCurrentPuzzleId(1)}>Puzzle 1</button>
             <button onClick={() => setCurrentPuzzleId(2)}>Puzzle 2</button>
@@ -178,14 +178,12 @@ function App() {
             onTileDrop={handleTileReturnToSlot}
             puzzleId={currentPuzzleId}
           />
-          {currentPuzzle?.hints && (
-            <Hints 
-              hints={currentPuzzle.hints}
-              onHintHover={handleHintHover}
-              onHintLeave={handleHintLeave}
-              activeHint={activeHintColor}
-            />
-          )}
+          <Hints 
+            hints={currentPuzzle.hints}
+            onHintHover={handleHintHover}
+            onHintLeave={handleHintLeave}
+            activeHint={activeHintColor}
+          />
         </main>
         <ToastContainer position="bottom-right" autoClose={3000} />
       </div>
