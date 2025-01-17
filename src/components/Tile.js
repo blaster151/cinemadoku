@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
+import MovieTile from './MovieTile';
 
 function LooseTile({ tile }) {
   const [{ isDragging }, drag] = useDrag(() => ({
@@ -29,7 +30,7 @@ function LooseTile({ tile }) {
           <p>{tile.data.name}</p>
         </>
       ) : (
-        <p>{tile.data.title}</p>
+        <MovieTile title={tile.data.title} />
       )}
     </div>
   );

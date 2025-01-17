@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
-import { useDrop, useDrag } from 'react-dnd';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+
 import './GameBoard.css';
 import Cell from './Cell.js';
 
