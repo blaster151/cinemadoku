@@ -148,43 +148,53 @@ function App() {
         <header className="App-header">
           <h1 className="game-title">Cinemadoku</h1>
           <div className="puzzle-selector">
-            <button onClick={() => setCurrentPuzzleId(1)}>Puzzle 1</button>
-            <button onClick={() => setCurrentPuzzleId(2)}>Puzzle 2</button>
-            <button onClick={() => setCurrentPuzzleId(3)}>Puzzle 3</button>
+            {[1, 2, 3].map(id => (
+              <button 
+                key={id}
+                onClick={() => setCurrentPuzzleId(id)}
+                className={currentPuzzleId === id ? 'active' : ''}
+              >
+                Puzzle {id}
+              </button>
+            ))}
           </div>
         </header>
-        <main className="App-main">
-          <GameBoard 
-            boardTiles={boardTiles} 
-            onTilePlacement={handleTilePlacement}
-            onInvalidDrop={handleInvalidDrop}
-            puzzle={currentPuzzle}
-            onCheckSolution={handleCheckSolution}
-            activeHint={activeHintColor}
-            hints={currentPuzzle.hints}
-            onHintHover={handleHintHover}
-            onHintLeave={handleHintLeave}
-            isHighlighted={(rowIndex, cellIndex) => {
-              const cellHints = currentPuzzle.hints
-                .filter(hint => hint.relatedTiles.includes(currentPuzzle.solution[rowIndex][cellIndex]))
-                .map(hint => hint.color);
-              return activeHintColor && cellHints.includes(activeHintColor);
-            }}
-            onTileRemoval={handleTileRemoval}
-            puzzleId={currentPuzzleId}
-          />
-          <Tiles 
-            tiles={tiles.filter(tile => !tile.isPlaced)}
-            onTileDrop={handleTileReturnToSlot}
-            puzzleId={currentPuzzleId}
-          />
-          <Hints 
-            hints={currentPuzzle.hints}
-            onHintHover={handleHintHover}
-            onHintLeave={handleHintLeave}
-            activeHint={activeHintColor}
-          />
-        </main>
+        <div className="game-container">
+          <div className="left-column">
+            <GameBoard 
+              boardTiles={boardTiles} 
+              onTilePlacement={handleTilePlacement}
+              onInvalidDrop={handleInvalidDrop}
+              puzzle={currentPuzzle}
+              onCheckSolution={handleCheckSolution}
+              activeHint={activeHintColor}
+              hints={currentPuzzle.hints}
+              onHintHover={handleHintHover}
+              onHintLeave={handleHintLeave}
+              isHighlighted={(rowIndex, cellIndex) => {
+                const cellHints = currentPuzzle.hints
+                  .filter(hint => hint.relatedTiles.includes(currentPuzzle.solution[rowIndex][cellIndex]))
+                  .map(hint => hint.color);
+                return activeHintColor && cellHints.includes(activeHintColor);
+              }}
+              onTileRemoval={handleTileRemoval}
+              puzzleId={currentPuzzleId}
+            />
+            <Hints 
+              hints={currentPuzzle.hints}
+              onHintHover={handleHintHover}
+              onHintLeave={handleHintLeave}
+              activeHint={activeHintColor}
+            />
+          </div>
+          <div className="right-column">
+            <Tiles 
+              tiles={tiles.filter(tile => !tile.isPlaced)}
+              onTileDrop={handleTileReturnToSlot}
+              puzzleId={currentPuzzleId}
+            />
+          </div>
+        </div>
         <ToastContainer position="bottom-right" autoClose={3000} />
       </div>
     </DndProvider>

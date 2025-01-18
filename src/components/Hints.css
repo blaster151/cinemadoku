@@ -1,28 +1,62 @@
 .hints-container {
-    margin-top: 20px;
-  }
-  
-  .hints-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .hint-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    padding: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .hint-item.active {
-    background-color: rgba(255, 255, 0, 0.1);
-  }
-  
-  .hint-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.hints-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
+
+.hint-item {
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  margin: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Add hover state */
+.hint-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Style for active hint */
+.hint-item.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.hint-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Style for hint markers on the board */
+.hint-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.hint-marker:hover,
+.hint-marker.active {
+  transform: scale(1.2);
+}

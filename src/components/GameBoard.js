@@ -88,34 +88,37 @@ function GameBoard({
   }, [puzzle?.solution, tiles]);
 
   return (
-    <div className="game-board-container">
-      <div className="game-board">
-        {boardPattern.map((row, rowIndex) => (
-          row.map((cellType, cellIndex) => (
-            <Cell
-              key={`puzzle${puzzle.id}-cell${rowIndex}-${cellIndex}-tile${boardTiles[`${rowIndex}-${cellIndex}`]?.id || 'empty'}`}
-              type={cellType}
-              rowIndex={rowIndex}
-              cellIndex={cellIndex}
-              onDrop={handleDrop}
-              onInvalidDrop={onInvalidDrop}
-              onSwap={handleSwap}
-              placedTile={tiles[`${rowIndex}-${cellIndex}`]}
-              hintColors={getHintColorsForCell(rowIndex, cellIndex)}
-              isHighlighted={activeHint && hints.find(h => h.color === activeHint)?.relatedTiles.includes(puzzle.solution[rowIndex][cellIndex])}
-              onHintHover={onHintHover}
-              onHintLeave={onHintLeave}
-              activeHint={activeHint}
-            />
-          ))
-        ))}
+    <div className="game-board-section">
+      <h2>Game Board</h2>
+      <div className="game-board-container">
+        <div className="game-board">
+          {boardPattern.map((row, rowIndex) => (
+            row.map((cellType, cellIndex) => (
+              <Cell
+                key={`puzzle${puzzle.id}-cell${rowIndex}-${cellIndex}-tile${boardTiles[`${rowIndex}-${cellIndex}`]?.id || 'empty'}`}
+                type={cellType}
+                rowIndex={rowIndex}
+                cellIndex={cellIndex}
+                onDrop={handleDrop}
+                onInvalidDrop={onInvalidDrop}
+                onSwap={handleSwap}
+                placedTile={tiles[`${rowIndex}-${cellIndex}`]}
+                hintColors={getHintColorsForCell(rowIndex, cellIndex)}
+                isHighlighted={activeHint && hints.find(h => h.color === activeHint)?.relatedTiles.includes(puzzle.solution[rowIndex][cellIndex])}
+                onHintHover={onHintHover}
+                onHintLeave={onHintLeave}
+                activeHint={activeHint}
+              />
+            ))
+          ))}
+        </div>
+        <button 
+          className={`check-solution-button ${!isBoardComplete() ? 'incomplete' : ''}`}
+          onClick={handleCheckSolution}
+        >
+          Check Solution
+        </button>
       </div>
-      <button 
-        className={`check-solution-button ${!isBoardComplete() ? 'incomplete' : ''}`}
-        onClick={handleCheckSolution}
-      >
-        Check Solution
-      </button>
     </div>
   );
 }

@@ -7,21 +7,23 @@ function Hints({ hints = [], onHintHover, onHintLeave, activeHint }) {
   }
 
   return (
-    <div className="hints-container">
+    <div className="hints-section">
       <h2>Hints</h2>
-      <ul className="hints-list">
-        {hints.map((hint) => (
-          <li
-            key={hint.id}
-            className={`hint-item ${hint.color === activeHint ? 'active' : ''}`}
-            onMouseEnter={() => onHintHover(hint.color)}
-            onMouseLeave={onHintLeave}
-          >
-            <span className="hint-color" style={{ backgroundColor: hint.color }}></span>
-            {hint.text}
-          </li>
-        ))}
-      </ul>
+      <div className="hints-container">
+        <ul className="hints-list">
+          {hints.map((hint) => (
+            <li
+              key={hint.id}
+              className={`hint-item ${hint.color === activeHint ? 'active' : ''}`}
+              onMouseEnter={() => onHintHover(hint.color)}
+              onMouseLeave={onHintLeave}
+            >
+              <span className="hint-color" style={{ backgroundColor: hint.color }}></span>
+              {hint.text}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
