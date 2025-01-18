@@ -15,11 +15,11 @@ function GameBoard({
   onHintLeave
 }) {
   const boardPattern = useMemo(() => [
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
-    ['Actor', null, 'Actor', null, 'Actor'],
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie'],
-    ['Actor', null, 'Actor', null, 'Actor'],
-    ['Movie', 'Actor', 'Movie', 'Actor', 'Movie']
+    ['Actor', 'Movie', 'Actor', 'Movie', 'Actor'],
+    ['Movie', null, 'Movie', null, 'Movie'],
+    ['Actor', 'Movie', 'Actor', 'Movie', 'Actor'],
+    ['Movie', null, 'Movie', null, 'Movie'],
+    ['Actor', 'Movie', 'Actor', 'Movie', 'Actor']
   ], []);
 
   const [tiles, setTiles] = useState(boardTiles);

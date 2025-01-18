@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
@@ -6,7 +6,17 @@ import MovieTile from './MovieTile';
 function PlacedTile({ tile }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'tile',
-    item: { id: tile.id, type: tile.type, data: tile.data },
+    item: (monitor) => {
+      // Add dragging class when drag starts
+      const element = document.querySelector(`[data-tile-id="${tile.id}"]`);
+      if (element) element.classList.add('dragging');
+      return { id: tile.id, type: tile.type, data: tile.data };
+    },
+    end: (item, monitor) => {
+      // Remove dragging class when drag ends
+      const element = document.querySelector(`[data-tile-id="${tile.id}"]`);
+      if (element) element.classList.remove('dragging');
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -19,6 +29,7 @@ function PlacedTile({ tile }) {
       ref={drag}
       className={`loose-tile ${tile.type.toLowerCase()}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      data-tile-id={tile.id}  // Add data attribute for finding element
     >
       {tile.type === 'Actor' ? (
         <>

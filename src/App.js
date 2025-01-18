@@ -148,7 +148,7 @@ function App() {
         <header className="App-header">
           <h1 className="game-title">Cinemadoku</h1>
           <div className="puzzle-selector">
-            {[1, 2, 3].map(id => (
+            {[1, 2, 3, 4, 5, 6].map(id => (
               <button 
                 key={id}
                 onClick={() => setCurrentPuzzleId(id)}

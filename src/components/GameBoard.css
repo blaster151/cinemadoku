@@ -74,7 +74,7 @@
   background-color: rgba(255, 255, 0, 0.1);
 }
 
-.hint-marker {
+.cell .hint-marker {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -82,18 +82,17 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   top: 5px;
-  left: 5px;
 }
 
-.hint-marker:hover,
-.hint-marker.active {
+.cell .hint-marker-0 { left: 5px; }
+.cell .hint-marker-1 { left: 20px; }
+.cell .hint-marker-2 { left: 35px; }
+.cell .hint-marker-3 { left: 50px; }
+
+.cell .hint-marker:hover,
+.cell .hint-marker.active {
   transform: scale(1.2);
 }
-
-.hint-marker-0 { left: 5px; }
-.hint-marker-1 { left: 20px; }
-.hint-marker-2 { left: 35px; }
-.hint-marker-3 { left: 50px; }
 
 .check-solution-button {
   padding: 10px 20px;

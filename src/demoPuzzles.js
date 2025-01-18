@@ -477,5 +477,101 @@ export const demoPuzzles = [
               longerDescription: "Both 'Ratatouille' and 'Wreck-It Ralph' feature unlikely heroes: a rat who wants to be a chef and a video game villain who wants to be a hero. These films challenge stereotypes and explore themes of identity and following one's dreams."
             },
           ]
+        },
+        {
+          id: 6,
+          name: "Character Actors 2",
+          tiles: [
+            { id: 0, type: "Actor", data: { name: "Philip Seymour Hoffman", birthYear: 1967, birthplace: "Fairport, New York, USA" } },
+            { id: 1, type: "Movie", data: { title: "Magnolia", releaseYear: 1999, director: "Paul Thomas Anderson" } },
+            { id: 2, type: "Actor", data: { name: "John C. Reilly", birthYear: 1965, birthplace: "Chicago, Illinois, USA" } },
+            { id: 3, type: "Movie", data: { title: "The Master", releaseYear: 2012, director: "Paul Thomas Anderson" } },
+            { id: 4, type: "Movie", data: { title: "Boogie Nights", releaseYear: 1997, director: "Paul Thomas Anderson" } },
+            { id: 5, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+            { id: 6, type: "Movie", data: { title: "Dear Evan Hansen", releaseYear: 2021, director: "Stephen Chbosky" } },
+            { id: 7, type: "Actor", data: { name: "Julianne Moore", birthYear: 1960, birthplace: "Fort Bragg, North Carolina, USA" } },
+            { id: 8, type: "Movie", data: { title: "Chicago", releaseYear: 2002, director: "Rob Marshall" } },
+            { id: 9, type: "Actor", data: { name: "Catherine Zeta-Jones", birthYear: 1969, birthplace: "Swansea, Wales, UK" } },
+            { id: 10, type: "Movie", data: { title: "Anchorman", releaseYear: 2004, director: "Adam McKay" } },
+            { id: 11, type: "Movie", data: { title: "Crazy Stupid Love", releaseYear: 2011, director: "Glenn Ficarra, John Requa" } },
+            { id: 12, type: "Actor", data: { name: "Steve Carell", birthYear: 1962, birthplace: "Concord, Massachusetts, USA" } },
+            { id: 13, type: "Movie", data: { title: "Enchanted", releaseYear: 2007, director: "Kevin Lima" } },
+            { id: 14, type: "Movie", data: { title: "A Single Man", releaseYear: 2009, director: "Tom Ford" } },
+            { id: 15, type: "Actor", data: { name: "Patrick Dempsey", birthYear: 1966, birthplace: "Lewiston, Maine, USA" } },
+            { id: 16, type: "Movie", data: { title: "Valentine's Day", releaseYear: 2010, director: "Garry Marshall" } },
+            { id: 17, type: "Actor", data: { name: "Colin Firth", birthYear: 1960, birthplace: "Grayshott, Hampshire, England, UK" } },
+            { id: 18, type: "Movie", data: { title: "Welcome to Marwen", releaseYear: 2018, director: "Robert Zemeckis" } },
+            { id: 19, type: "Movie", data: { title: "Supernova", releaseYear: 2020, director: "Harry Macqueen" } },
+            { id: 20, type: "Actor", data: { name: "Stanley Tucci", birthYear: 1960, birthplace: "Peekskill, New York, USA" } }
+          ],
+          initialPlacements: [
+            { tileId: 0, position: "0-0" },
+            { tileId: 1, position: "0-1" }
+          ],
+          solution: [
+            [0, 1, 2, 8, 9],
+            [3, null, 4, null, 10],
+            [5, 6, 7, 11, 12],
+            [13, null, 14, null, 18],
+            [15, 16, 17, 19, 20]
+          ],
+          hints: [
+            {
+              id: 1,
+              text: "Paul Thomas Anderson collaborators",
+              color: "#FF5733",
+              relatedTiles: [0, 2, 4],
+              longerDescription: "Philip Seymour Hoffman, John C. Reilly, and Boogie Nights all represent key collaborations with director Paul Thomas Anderson."
+            },
+            {
+              id: 2,
+              text: "Musical performers",
+              color: "#33FF57",
+              relatedTiles: [2, 9, 15],
+              longerDescription: "John C. Reilly, Catherine Zeta-Jones, and Patrick Dempsey have all performed in movie musicals - Chicago, Rock of Ages, and Enchanted respectively."
+            },
+            {
+              id: 3,
+              text: "Oscar nominees 2021-2022",
+              color: "#3357FF",
+              relatedTiles: [17, 19, 20],
+              longerDescription: "Colin Firth and Stanley Tucci's performances in Supernova earned critical acclaim, though surprisingly not Oscar nominations."
+            },
+            {
+              id: 4,
+              text: "Born in 1960",
+              color: "#FF33F1",
+              relatedTiles: [7, 17, 20],
+              longerDescription: "Julianne Moore, Colin Firth, and Stanley Tucci were all born in 1960."
+            },
+            {
+              id: 5,
+              text: "Superhero film actors",
+              color: "#33FFF1",
+              relatedTiles: [5, 7, 20],
+              longerDescription: "Amy Adams (DC's Lois Lane), Julianne Moore (Kingsman), and Stanley Tucci (Captain America) have all appeared in superhero/comic book films."
+            },
+            {
+              id: 6,
+              text: "Famous redheads",
+              color: "#FFF133",
+              relatedTiles: [5, 7],
+              longerDescription: "Amy Adams and Julianne Moore are both known for their distinctive red hair."
+            },
+            {
+              id: 7,
+              text: "Played real people",
+              color: "#8B33FF",
+              relatedTiles: [12, 17, 20],
+              longerDescription: "Steve Carell (John du Pont in Foxcatcher), Colin Firth (King George VI), and Stanley Tucci (Stanley Child in Julie & Julia) have all portrayed historical figures."
+            },
+            {
+              id: 8,
+              text: "British-born actors",
+              color: "#FF3333",
+              relatedTiles: [9, 17],
+              longerDescription: "Catherine Zeta-Jones and Colin Firth were both born in the United Kingdom."
+            }
+          ]
         }
       ];
