@@ -29,7 +29,7 @@ function PlacedTile({ tile }) {
       ref={drag}
       className={`loose-tile ${tile.type.toLowerCase()}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
-      data-tile-id={tile.id}  // Add data attribute for finding element
+      data-tile-id={tile.id}
     >
       {tile.type === 'Actor' ? (
         <>

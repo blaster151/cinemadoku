@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { normalizeForImagePath } from '../utils/textNormalizer';
 
-function MovieTile({ title }) {
+function MovieTile({ title, themeId = '1' }) {
   const [imageExists, setImageExists] = useState(false);
   const normalizedTitle = normalizeForImagePath(title);
+  const imagePath = `/images/themes/${themeId}/movies/${normalizedTitle}.png`;
 
   useEffect(() => {
-    console.log('MovieTile: Checking image for:', normalizedTitle);
     const img = new Image();
     img.onload = () => {
-      console.log('MovieTile: Image found for:', normalizedTitle);
       setImageExists(true);
     };
     img.onerror = () => {
-      console.log('MovieTile: No image found for:', normalizedTitle);
       setImageExists(false);
     };
-    img.src = `/images/movies/${normalizedTitle}.png`;
+    img.src = imagePath;
 
     return () => {
       img.onload = null;
       img.onerror = null;
     };
-  }, [title, normalizedTitle]);
-
-  console.log('MovieTile: Rendering for:', title, 'imageExists:', imageExists);
+  }, [title, normalizedTitle, themeId, imagePath]);
 
   if (imageExists) {
     return (
-      <div className="movie-tile-debug">
+      <div className="movie-tile">
         <img 
-          src={`/images/movies/${normalizedTitle}.png`}
+          src={imagePath}
           alt=""
           className="movie-image"
         />

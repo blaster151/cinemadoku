@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react';
+import React, { useMemo, useEffect, useState, forwardRef, useImperativeHandle } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
@@ -20,6 +20,7 @@ function Tile({ id, type, data }) {
       ref={drag}
       className={`loose-tile ${type.toLowerCase()}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      data-tile-id={id}
     >
       {type === 'Actor' ? (
         <>
@@ -50,15 +51,16 @@ function TileSlot({ index, tile, onTileDrop }) {
     <div 
       ref={drop} 
       className={`tile-slot ${isOver ? 'is-over' : ''} ${tile ? 'occupied' : 'empty'}`}
+      data-slot-index={index}
     >
       {tile && <Tile {...tile} />}
     </div>
   );
 }
 
-function Tiles({ tiles, onTileDrop }) {
+const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef }, ref) => {
   const unplacedTiles = useMemo(() => 
-    tiles.filter(t => !t.isPlaced),
+    tiles?.filter(t => !t.isPlaced) || [],
     [tiles]
   );
   
@@ -93,7 +95,60 @@ function Tiles({ tiles, onTileDrop }) {
   );
 
   // Get puzzleId from the first tile (they'll all be from the same puzzle)
-  const puzzleId = tiles[0]?.puzzleId;
+  const puzzleId = tiles?.[0]?.puzzleId || 'default';
+
+  const handleAutosolve = async () => {
+    console.log('Tiles handleAutosolve called');
+    const tileDestinations = onAutosolve();
+    console.log('Got tile destinations:', tileDestinations);
+    if (!tileDestinations?.length) {
+      console.log('No tiles to move');
+      return;
+    }
+
+    // For each tile that needs to move
+    tileDestinations.forEach(({ tileId, targetPos }) => {
+      console.log(`Processing tile ${tileId} to position ${targetPos.row}-${targetPos.col}`);
+      
+      // Find the loose tile element
+      const tileElement = document.querySelector(`.loose-tile[data-tile-id="${tileId}"]`);
+      if (!tileElement) {
+        console.log(`Could not find tile element for ${tileId}`);
+        return;
+      }
+
+      // Find the target cell
+      const targetCell = document.querySelector(`.cell[data-position="${targetPos.row}-${targetPos.col}"]`);
+      if (!targetCell) {
+        console.log(`Could not find target cell for position ${targetPos.row}-${targetPos.col}`);
+        return;
+      }
+
+      console.log('Found both tile and target cell, calculating movement');
+      // Calculate the movement
+      const tileRect = tileElement.getBoundingClientRect();
+      const targetRect = targetCell.getBoundingClientRect();
+      const deltaX = targetRect.left - tileRect.left;
+      const deltaY = targetRect.top - tileRect.top;
+
+      console.log(`Moving tile by ${deltaX}px, ${deltaY}px`);
+      // Set up the animation
+      tileElement.style.setProperty('--move-x', `${deltaX}px`);
+      tileElement.style.setProperty('--move-y', `${deltaY}px`);
+      tileElement.classList.add('autosolving');
+
+      // Place the tile after animation
+      setTimeout(() => {
+        console.log(`Placing tile ${tileId} at ${targetPos.row}-${targetPos.col}`);
+        onTileDrop(tileId, targetPos.row, targetPos.col);
+      }, 2000);
+    });
+  };
+
+  // Expose handleAutosolve to parent through ref
+  useImperativeHandle(ref, () => ({
+    handleAutosolve
+  }));
 
   return (
     <div className="tiles-container">
@@ -110,6 +165,6 @@ function Tiles({ tiles, onTileDrop }) {
       </div>
     </div>
   );
-}
+});
 
 export default Tiles;

@@ -24,6 +24,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placed
     <div 
       ref={drop}
       className={`cell ${type ? '' : 'empty'} ${isOver ? 'is-over' : ''} ${canDrop ? 'can-drop' : ''} ${isHighlighted ? 'highlighted' : ''}`}
+      data-position={`${rowIndex}-${cellIndex}`}
     >
       {type && (
         <div className="cell-type">

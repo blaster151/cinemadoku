@@ -19,6 +19,7 @@ function LooseTile({ tile }) {
       ref={drag}
       className={`loose-tile ${tile.type.toLowerCase()}`}
       style={{ opacity: isDragging ? 0.5 : 1 }}
+      data-tile-id={tile.id}
     >
       {tile.type === 'Actor' ? (
         <>

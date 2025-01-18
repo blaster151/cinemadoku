@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
 import './GameBoard.css';
 import Cell from './Cell.js';
+import Tiles from './Tiles';
 
 function GameBoard({ 
   boardTiles, 
@@ -12,8 +13,11 @@ function GameBoard({
   activeHint, 
   hints,
   onHintHover, 
-  onHintLeave
+  onHintLeave,
+  looseTiles = []
 }) {
+  const boardRef = useRef(null);
+  const tilesRef = useRef(null);
   const boardPattern = useMemo(() => [
     ['Actor', 'Movie', 'Actor', 'Movie', 'Actor'],
     ['Movie', null, 'Movie', null, 'Movie'],
@@ -87,11 +91,43 @@ function GameBoard({
     );
   }, [puzzle?.solution, tiles]);
 
+  const handleAutosolve = useCallback(() => {
+    console.log('GameBoard handleAutosolve called');
+    if (!puzzle?.solution) {
+      console.log('No puzzle solution found');
+      return;
+    }
+    
+    // Create a map of where each tile should go
+    const tileDestinations = puzzle.solution.flatMap((row, rowIndex) => 
+      row.map((tileId, colIndex) => {
+        if (!tileId) return null;
+        
+        // Skip if tile is already in correct position
+        const currentPos = Object.entries(tiles).find(([_, tile]) => tile?.id === tileId)?.[0];
+        const targetPos = `${rowIndex}-${colIndex}`;
+        if (currentPos === targetPos) {
+          console.log(`Tile ${tileId} already in correct position`);
+          return null;
+        }
+        
+        console.log(`Found tile ${tileId} to move to ${rowIndex}-${colIndex}`);
+        return {
+          tileId,
+          targetPos: { row: rowIndex, col: colIndex }
+        };
+      }).filter(Boolean)
+    );
+
+    console.log('Tile destinations:', tileDestinations);
+    return tileDestinations;
+  }, [puzzle?.solution, tiles]);
+
   return (
     <div className="game-board-section">
       <h2>Game Board</h2>
       <div className="game-board-container">
-        <div className="game-board">
+        <div className="game-board" ref={boardRef}>
           {boardPattern.map((row, rowIndex) => (
             row.map((cellType, cellIndex) => (
               <Cell
@@ -112,12 +148,24 @@ function GameBoard({
             ))
           ))}
         </div>
-        <button 
-          className={`check-solution-button ${!isBoardComplete() ? 'incomplete' : ''}`}
-          onClick={handleCheckSolution}
-        >
-          Check Solution
-        </button>
+        <div className="button-container">
+          <button 
+            className={`check-solution-button ${!isBoardComplete() ? 'incomplete' : ''}`}
+            onClick={handleCheckSolution}
+          >
+            Check Solution
+          </button>
+          <button 
+            className="autosolve-button"
+            onClick={() => {
+              console.log('Autosolve button clicked');
+              console.log('tilesRef.current:', tilesRef.current);
+              tilesRef.current?.handleAutosolve();
+            }}
+          >
+            Autosolve
+          </button>
+        </div>
       </div>
     </div>
   );
