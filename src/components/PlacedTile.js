@@ -37,6 +37,7 @@ function PlacedTile({ tile }) {
             name={tile.data.name}
             onLoad={() => setImageLoaded(true)}
             className={imageLoaded ? 'loaded' : ''}
+            themeId="1"
           />
           <p>{tile.data.name}</p>
         </>
