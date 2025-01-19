@@ -4,7 +4,7 @@ import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
 import './Tiles.css';
 
-function Tile({ id, type, data }) {
+function Tile({ id, type, data, themeId }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'tile',
     item: { id, type, data },
@@ -28,17 +28,21 @@ function Tile({ id, type, data }) {
             name={data.name}
             onLoad={() => setImageLoaded(true)}
             className={imageLoaded ? 'loaded' : ''}
+            themeId={themeId}
           />
           <p>{data.name}</p>
         </>
       ) : (
-        <MovieTile title={data.title} />
+        <MovieTile 
+          title={data.title}
+          themeId={themeId}
+        />
       )}
     </div>
   );
 }
 
-function TileSlot({ index, tile, onTileDrop }) {
+function TileSlot({ index, tile, onTileDrop, themeId }) {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'tile',
     drop: (item) => onTileDrop(item.id, index),
@@ -53,12 +57,12 @@ function TileSlot({ index, tile, onTileDrop }) {
       className={`tile-slot ${isOver ? 'is-over' : ''} ${tile ? 'occupied' : 'empty'}`}
       data-slot-index={index}
     >
-      {tile && <Tile {...tile} />}
+      {tile && <Tile {...tile} themeId={themeId} />}
     </div>
   );
 }
 
-const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef }, ref) => {
+const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, themeId }, ref) => {
   const unplacedTiles = useMemo(() => 
     tiles?.filter(t => !t.isPlaced) || [],
     [tiles]
@@ -160,6 +164,7 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef }, ref
             index={index} 
             tile={tile} 
             onTileDrop={onTileDrop}
+            themeId={themeId}
           />
         ))}
       </div>

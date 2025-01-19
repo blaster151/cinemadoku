@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
 
-function PlacedTile({ tile }) {
+function PlacedTile({ tile, themeId }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'tile',
     item: (monitor) => {
@@ -37,12 +37,15 @@ function PlacedTile({ tile }) {
             name={tile.data.name}
             onLoad={() => setImageLoaded(true)}
             className={imageLoaded ? 'loaded' : ''}
-            themeId="1"
+            themeId={themeId}
           />
           <p>{tile.data.name}</p>
         </>
       ) : (
-        <MovieTile title={tile.data.title} />
+        <MovieTile 
+          title={tile.data.title}
+          themeId={themeId}
+        />
       )}
     </div>
   );

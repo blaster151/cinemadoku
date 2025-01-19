@@ -2,7 +2,7 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import PlacedTile from './PlacedTile';
 
-function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placedTile, hintColors, isHighlighted, onHintHover, onHintLeave, activeHint }) {
+function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placedTile, hintColors, isHighlighted, onHintHover, onHintLeave, activeHint, themeId }) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'tile',
     drop: (item) => onDrop(item.id, rowIndex, cellIndex),
@@ -39,6 +39,7 @@ function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placed
         <PlacedTile 
           tile={placedTile}
           onSwap={(draggedId) => onSwap(draggedId, rowIndex, cellIndex)}
+          themeId={themeId}
         />
       )}
       {hintColors.map((color, index) => (

@@ -14,7 +14,8 @@ function GameBoard({
   hints,
   onHintHover, 
   onHintLeave,
-  looseTiles = []
+  looseTiles = [],
+  themeId = '1'
 }) {
   const boardRef = useRef(null);
   const tilesRef = useRef(null);
@@ -144,6 +145,7 @@ function GameBoard({
                 onHintHover={onHintHover}
                 onHintLeave={onHintLeave}
                 activeHint={activeHint}
+                themeId={themeId}
               />
             ))
           ))}

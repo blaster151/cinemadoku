@@ -9,12 +9,16 @@ import Hints from './components/Hints';
 import { demoPuzzles } from './demoPuzzles';
 import './App.css';
 import { useImagePreloader } from './hooks/useImagePreloader';
+import ThemeSelector from './components/ThemeSelector';
 
 function App() {
   const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
   const [tiles, setTiles] = useState([]);
   const [boardTiles, setBoardTiles] = useState({});
   const [activeHintColor, setActiveHintColor] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState(() => {
+    return localStorage.getItem('selectedTheme') || '1';
+  });
 
   const currentPuzzle = useMemo(() => 
     demoPuzzles.find(p => p.id === currentPuzzleId),
@@ -142,6 +146,11 @@ function App() {
     ));
   }, []);
 
+  const handleThemeChange = (newTheme) => {
+    setCurrentTheme(newTheme);
+    localStorage.setItem('selectedTheme', newTheme);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
@@ -179,19 +188,32 @@ function App() {
               }}
               onTileRemoval={handleTileRemoval}
               puzzleId={currentPuzzleId}
+              themeId={currentTheme}
+              key={`board-${currentTheme}`}
             />
-            <Hints 
-              hints={currentPuzzle.hints}
-              onHintHover={handleHintHover}
-              onHintLeave={handleHintLeave}
-              activeHint={activeHintColor}
-            />
+            <div className="hints-section">
+              <h2>Hints</h2>
+              <div className="hints-container">
+                <Hints 
+                  hints={currentPuzzle.hints}
+                  onHintHover={handleHintHover}
+                  onHintLeave={handleHintLeave}
+                  activeHint={activeHintColor}
+                />
+              </div>
+            </div>
           </div>
           <div className="right-column">
+            <ThemeSelector 
+              currentTheme={currentTheme}
+              onThemeChange={handleThemeChange}
+            />
             <Tiles 
               tiles={tiles.filter(tile => !tile.isPlaced)}
               onTileDrop={handleTileReturnToSlot}
               puzzleId={currentPuzzleId}
+              themeId={currentTheme}
+              key={`tiles-${currentTheme}`}
             />
           </div>
         </div>
