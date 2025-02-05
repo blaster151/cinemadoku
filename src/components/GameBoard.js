@@ -15,7 +15,8 @@ function GameBoard({
   onHintHover, 
   onHintLeave,
   looseTiles = [],
-  themeId = '1'
+  themeId = '1',
+  onAutosolve,
 }) {
   const boardRef = useRef(null);
   const tilesRef = useRef(null);
@@ -124,6 +125,13 @@ function GameBoard({
     return tileDestinations;
   }, [puzzle?.solution, tiles]);
 
+  const handleAutosolveButton = useCallback(() => {
+    const tileDestinations = handleAutosolve();
+    if (tileDestinations) {
+      onAutosolve(tileDestinations);
+    }
+  }, [handleAutosolve, onAutosolve]);
+
   return (
     <div className="game-board-section">
       <h2>Game Board</h2>
@@ -159,11 +167,7 @@ function GameBoard({
           </button>
           <button 
             className="autosolve-button"
-            onClick={() => {
-              console.log('Autosolve button clicked');
-              console.log('tilesRef.current:', tilesRef.current);
-              tilesRef.current?.handleAutosolve();
-            }}
+            onClick={handleAutosolveButton}
           >
             Autosolve
           </button>

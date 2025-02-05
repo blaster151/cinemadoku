@@ -64,26 +64,43 @@ function TileSlot({ index, tile, onTileDrop, themeId }) {
 
 const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, themeId }, ref) => {
   const unplacedTiles = useMemo(() => 
-    tiles?.filter(t => !t.isPlaced) || [],
+    tiles?.filter(t => !t.isPlaced)
+      .map(tile => ({
+        ...tile,
+      }))
+    || [],
     [tiles]
   );
   
   const [initialPositions, setInitialPositions] = useState({});
+  
+  // Get puzzleId from the first tile
+  const puzzleId = tiles?.[0]?.puzzleId || 'default';
 
-  // Reset positions when puzzle changes
+  // Shuffle only when puzzle changes
   useEffect(() => {
     if (unplacedTiles.length > 0) {
-      setInitialPositions(
-        unplacedTiles.reduce((acc, tile, index) => {
-          acc[tile.id] = index;
-          return acc;
-        }, {})
-      );
+      // Fisher-Yates shuffle with additional entropy
+      const shuffleArray = array => {
+        const seed = Date.now() + Math.random();
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor((Math.random() * seed) % (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      };
+
+      const positions = shuffleArray([...unplacedTiles.map(t => t.id)]);
+      const shuffledPositions = positions.reduce((acc, id, index) => {
+        acc[id] = index;
+        return acc;
+      }, {});
+      
+      setInitialPositions(shuffledPositions);
     }
     
-    // Cleanup when puzzle changes
     return () => setInitialPositions({});
-  }, [unplacedTiles]); // Changed from checking length to watching unplacedTiles
+  }, [puzzleId, unplacedTiles]);
   
   const slots = useMemo(() => 
     Array(Math.max(Object.keys(initialPositions).length, unplacedTiles.length))
@@ -97,9 +114,6 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
       }),
     [initialPositions, unplacedTiles]
   );
-
-  // Get puzzleId from the first tile (they'll all be from the same puzzle)
-  const puzzleId = tiles?.[0]?.puzzleId || 'default';
 
   const handleAutosolve = async () => {
     console.log('Tiles handleAutosolve called');

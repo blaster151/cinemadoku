@@ -151,13 +151,21 @@ function App() {
     localStorage.setItem('selectedTheme', newTheme);
   };
 
+  const handleAutosolve = useCallback((tileDestinations) => {
+    if (!tileDestinations) return;
+    
+    tileDestinations.forEach(({ tileId, targetPos }) => {
+      handleTilePlacement(tileId, targetPos.row, targetPos.col);
+    });
+  }, [handleTilePlacement]);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
           <h1 className="game-title">Cinemadoku</h1>
           <div className="puzzle-selector">
-            {[1, 2, 3, 4, 5, 6].map(id => (
+            {[1, 2, 3, 4, 5, 6, 7, 8].map(id => (
               <button 
                 key={id}
                 onClick={() => setCurrentPuzzleId(id)}
@@ -180,6 +188,7 @@ function App() {
               hints={currentPuzzle.hints}
               onHintHover={handleHintHover}
               onHintLeave={handleHintLeave}
+              onAutosolve={handleAutosolve}
               isHighlighted={(rowIndex, cellIndex) => {
                 const cellHints = currentPuzzle.hints
                   .filter(hint => hint.relatedTiles.includes(currentPuzzle.solution[rowIndex][cellIndex]))
@@ -191,17 +200,6 @@ function App() {
               themeId={currentTheme}
               key={`board-${currentTheme}`}
             />
-            <div className="hints-section">
-              <h2>Hints</h2>
-              <div className="hints-container">
-                <Hints 
-                  hints={currentPuzzle.hints}
-                  onHintHover={handleHintHover}
-                  onHintLeave={handleHintLeave}
-                  activeHint={activeHintColor}
-                />
-              </div>
-            </div>
           </div>
           <div className="right-column">
             <ThemeSelector 
@@ -215,6 +213,17 @@ function App() {
               themeId={currentTheme}
               key={`tiles-${currentTheme}`}
             />
+            <div className="hints-section">
+              <h2>Hints</h2>
+              <div className="hints-container">
+                <Hints 
+                  hints={currentPuzzle.hints}
+                  onHintHover={handleHintHover}
+                  onHintLeave={handleHintLeave}
+                  activeHint={activeHintColor}
+                />
+              </div>
+            </div>
           </div>
         </div>
         <ToastContainer position="bottom-right" autoClose={3000} />

@@ -325,7 +325,6 @@
 
 /* Add or update the flex container styles */
 .game-container {
-  aspect-ratio: 4/3;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -337,15 +336,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex: 4;
+  flex: 6 1 0%;
   padding: 0;
-  background-color: rgba(255, 0, 0, 0.1);
-}
-
-.right-column {
-  flex: 6;
-  padding: 0;
-  background-color: rgba(0, 0, 255, 0.1);
 }
 
 /* Update tiles container to full width */
@@ -373,15 +365,6 @@
   object-fit: contain;
 }
 
-/* Fix the flex column issue by making it more specific */
-.game-container > .left-column {
-  flex: 4 1 0%;  /* Make this rule more specific and explicit */
-}
-
-.game-container > .right-column {
-  flex: 6 1 0%;  /* Make this rule more specific and explicit */
-}
-
 /* Remove any default margins that might be causing spacing */
 .game-board-section h2,
 .hints-container h2 {
@@ -391,7 +374,6 @@
 .hints-section {
   margin: 0;
   flex: 0 0 auto;
-  background-color: rgba(255, 255, 0, 0.1);  /* Light yellow */
 }
 
 /* Add different text sizes for loose vs placed tiles */
@@ -426,4 +408,15 @@
 /* Prevent any transitions on text */
 .movie-title-only {
   transition: none !important;
+}
+
+/* Remove debug background colors */
+.right-column {
+  flex: 6 1 0%;
+  padding: 0;
+}
+
+.hints-section {
+  margin: 0;
+  flex: 0 0 auto;
 }

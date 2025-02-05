@@ -4,7 +4,7 @@ import { normalizeForImagePath } from '../utils/textNormalizer';
 function MovieTile({ title, themeId = '1' }) {
   const [imageExists, setImageExists] = useState(false);
   const normalizedTitle = normalizeForImagePath(title);
-  const imagePath = `/images/themes/${themeId}/movies/${normalizedTitle}.png`;
+  const imagePath = `/themes/${themeId}/movies/${normalizedTitle}.png`;
 
   useEffect(() => {
     const img = new Image();

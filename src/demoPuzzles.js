@@ -30,11 +30,11 @@ export const demoPuzzles = [
         { tileId: 0, position: "0-1" },
       ],
       solution: [
-        [1, 0, 3, 2, 5],
-        [4, null, 8, null, 12],
-        [7, 6, 9, 10, 11],
-        [14, null, 16, null, 18],
-        [13, 20, 15, 17, 19]
+        [0, 10, 5, 15, 8],
+        [11, null, 16, null, 18],
+        [1, 13, 6, 12, 2],
+        [17, null, 14, null, 20],
+        [7, 19, 4, 3, 9]
       ],
       hints: [
         {
@@ -571,6 +571,204 @@ export const demoPuzzles = [
               color: "#FF3333",
               relatedTiles: [9, 17],
               longerDescription: "Catherine Zeta-Jones and Colin Firth were both born in the United Kingdom."
+            }
+          ]
+        },
+        {
+          id: 7,
+          name: "Golden Age Hollywood",
+          tiles: [
+            // Actors (10)
+            { id: 0, type: "Actor", data: { name: "Humphrey Bogart", birthYear: 1899, birthplace: "New York City, New York, USA" } },
+            { id: 1, type: "Actor", data: { name: "Katharine Hepburn", birthYear: 1907, birthplace: "Hartford, Connecticut, USA" } },
+            { id: 2, type: "Actor", data: { name: "Grace Kelly", birthYear: 1929, birthplace: "Philadelphia, Pennsylvania, USA" } },
+            { id: 3, type: "Actor", data: { name: "Charlie Chaplin", birthYear: 1889, birthplace: "London, England, UK" } },
+            { id: 4, type: "Actor", data: { name: "Gregory Peck", birthYear: 1916, birthplace: "La Jolla, California, USA" } },
+            { id: 5, type: "Actor", data: { name: "Ingrid Bergman", birthYear: 1915, birthplace: "Stockholm, Sweden" } },
+            { id: 6, type: "Actor", data: { name: "James Stewart", birthYear: 1908, birthplace: "Indiana, Pennsylvania, USA" } },
+            { id: 7, type: "Actor", data: { name: "Audrey Hepburn", birthYear: 1929, birthplace: "Brussels, Belgium" } },
+            { id: 8, type: "Actor", data: { name: "Cary Grant", birthYear: 1904, birthplace: "Bristol, England, UK" } },
+            { id: 9, type: "Actor", data: { name: "Bette Davis", birthYear: 1908, birthplace: "Lowell, Massachusetts, USA" } },
+            
+            // Movies (11)
+            { id: 10, type: "Movie", data: { title: "Casablanca", releaseYear: 1942, director: "Michael Curtiz" } },
+            { id: 11, type: "Movie", data: { title: "The African Queen", releaseYear: 1951, director: "John Huston" } },
+            { id: 12, type: "Movie", data: { title: "To Catch a Thief", releaseYear: 1955, director: "Alfred Hitchcock" } },
+            { id: 13, type: "Movie", data: { title: "Modern Times", releaseYear: 1936, director: "Charlie Chaplin" } },
+            { id: 14, type: "Movie", data: { title: "To Kill a Mockingbird", releaseYear: 1962, director: "Robert Mulligan" } },
+            { id: 15, type: "Movie", data: { title: "Notorious", releaseYear: 1946, director: "Alfred Hitchcock" } },
+            { id: 16, type: "Movie", data: { title: "Rear Window", releaseYear: 1954, director: "Alfred Hitchcock" } },
+            { id: 17, type: "Movie", data: { title: "Roman Holiday", releaseYear: 1953, director: "William Wyler" } },
+            { id: 18, type: "Movie", data: { title: "North by Northwest", releaseYear: 1959, director: "Alfred Hitchcock" } },
+            { id: 19, type: "Movie", data: { title: "All About Eve", releaseYear: 1950, director: "Joseph L. Mankiewicz" } },
+            { id: 20, type: "Movie", data: { title: "Vertigo", releaseYear: 1958, director: "Alfred Hitchcock" } }
+          ],
+          initialPlacements: [
+            { tileId: 0, position: "0-0" },
+            { tileId: 10, position: "0-1" }
+          ],
+          solution: [
+            [0, 10, 5, 15, 8],    // Bogart-Casablanca-Bergman-Notorious-Grant
+            [11, null, 16, null, 18],  // AfricanQueen-RearWindow-NorthByNorthwest
+            [1, 17, 7, 12, 2],    // KHepburn-RomanHoliday-AHepburn-ToCatchAThief-Kelly
+            [13, null, 14, null, 20],  // ModernTimes-Mockingbird-Vertigo
+            [3, 19, 9, 4, 6]     // Chaplin-AllAboutEve-Davis-Peck-Stewart
+          ],
+          hints: [
+            {
+              id: 1,
+              text: "Hitchcock's leading ladies",
+              color: "#FF5733",
+              relatedTiles: [2, 5, 12, 15],
+              longerDescription: "Grace Kelly and Ingrid Bergman were both favorite leading ladies of Alfred Hitchcock, starring in classics like To Catch a Thief and Notorious."
+            },
+            {
+              id: 2,
+              text: "Academy Award winners",
+              color: "#33FF57",
+              relatedTiles: [1, 4, 9, 14],
+              longerDescription: "Katharine Hepburn, Gregory Peck, and Bette Davis all won Academy Awards - Peck notably for To Kill a Mockingbird."
+            },
+            {
+              id: 3,
+              text: "Born in Europe",
+              color: "#3357FF",
+              relatedTiles: [3, 5, 7, 8],
+              longerDescription: "Charlie Chaplin, Ingrid Bergman, Audrey Hepburn, and Cary Grant were all born in Europe."
+            },
+            {
+              id: 4,
+              text: "Films released in the 1950s",
+              color: "#FF33F1",
+              relatedTiles: [11, 12, 17, 20],
+              longerDescription: "The African Queen, To Catch a Thief, Roman Holiday, and Vertigo were all released in the 1950s."
+            },
+            {
+              id: 5,
+              text: "Iconic screen couples",
+              color: "#33FFF1",
+              relatedTiles: [0, 5, 10, 15],
+              longerDescription: "Humphrey Bogart and Ingrid Bergman created magic in both Casablanca and Notorious."
+            },
+            {
+              id: 6,
+              text: "Born in 1908",
+              color: "#FFF133",
+              relatedTiles: [6, 9],
+              longerDescription: "James Stewart and Bette Davis were both born in 1908."
+            },
+            {
+              id: 7,
+              text: "AFI's Greatest Films",
+              color: "#8B33FF",
+              relatedTiles: [10, 14, 18, 20],
+              longerDescription: "Casablanca, To Kill a Mockingbird, North by Northwest, and Vertigo all appear on AFI's list of greatest American films."
+            },
+            {
+              id: 8,
+              text: "Born in Pennsylvania",
+              color: "#FF3333",
+              relatedTiles: [2, 6],
+              longerDescription: "Grace Kelly and James Stewart were both born in Pennsylvania - Philadelphia and Indiana, PA respectively."
+            }
+          ]
+        },
+        {
+          id: 8,
+          name: "Sci-Fi Connections",
+          tiles: [
+            // Actors (10)
+            { id: 0, type: "Actor", data: { name: "Jodie Foster", birthYear: 1962, birthplace: "Los Angeles, California, USA" } },
+            { id: 1, type: "Actor", data: { name: "Matthew McConaughey", birthYear: 1969, birthplace: "Uvalde, Texas, USA" } },
+            { id: 2, type: "Actor", data: { name: "Jessica Chastain", birthYear: 1977, birthplace: "Sacramento, California, USA" } },
+            { id: 3, type: "Actor", data: { name: "Anne Hathaway", birthYear: 1982, birthplace: "Brooklyn, New York, USA" } },
+            { id: 4, type: "Actor", data: { name: "Matt Damon", birthYear: 1970, birthplace: "Cambridge, Massachusetts, USA" } },
+            { id: 5, type: "Actor", data: { name: "Sandra Bullock", birthYear: 1964, birthplace: "Arlington, Virginia, USA" } },
+            { id: 6, type: "Actor", data: { name: "George Clooney", birthYear: 1961, birthplace: "Lexington, Kentucky, USA" } },
+            { id: 7, type: "Actor", data: { name: "Emily Blunt", birthYear: 1983, birthplace: "London, England, UK" } },
+            { id: 8, type: "Actor", data: { name: "John Krasinski", birthYear: 1979, birthplace: "Boston, Massachusetts, USA" } },
+            { id: 9, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+
+            // Movies (11)
+            { id: 10, type: "Movie", data: { title: "Contact", releaseYear: 1997, director: "Robert Zemeckis" } },
+            { id: 11, type: "Movie", data: { title: "Interstellar", releaseYear: 2014, director: "Christopher Nolan" } },
+            { id: 12, type: "Movie", data: { title: "The Martian", releaseYear: 2015, director: "Ridley Scott" } },
+            { id: 13, type: "Movie", data: { title: "Gravity", releaseYear: 2013, director: "Alfonso Cuarón" } },
+            { id: 14, type: "Movie", data: { title: "Arrival", releaseYear: 2016, director: "Denis Villeneuve" } },
+            { id: 15, type: "Movie", data: { title: "A Quiet Place", releaseYear: 2018, director: "John Krasinski" } },
+            { id: 16, type: "Movie", data: { title: "Edge of Tomorrow", releaseYear: 2014, director: "Doug Liman" } },
+            { id: 17, type: "Movie", data: { title: "Passengers", releaseYear: 2016, director: "Morten Tyldum" } },
+            { id: 18, type: "Movie", data: { title: "The Day the Earth Stood Still", releaseYear: 2008, director: "Scott Derrickson" } },
+            { id: 19, type: "Movie", data: { title: "The Midnight Sky", releaseYear: 2020, director: "George Clooney" } },
+            { id: 20, type: "Movie", data: { title: "Sunshine", releaseYear: 2007, director: "Danny Boyle" } }
+          ],
+          solution: [
+            [0, 10, 1, 11, 3],    // Foster-Contact-McConaughey-Interstellar-Hathaway
+            [12, null, 13, null, 14],  // Martian-Gravity-Arrival
+            [4, 16, 7, 15, 8],    // Damon-EdgeOfTomorrow-Blunt-QuietPlace-Krasinski
+            [18, null, 17, null, 19],  // DayEarthStoodStill-Passengers-MidnightSky
+            [9, 14, 5, 13, 6]     // Adams-Arrival-Bullock-Gravity-Clooney
+          ],
+          initialPlacements: [
+            { tileId: 0, position: "0-0" },
+            { tileId: 10, position: "0-1" }
+          ],
+          hints: [
+            {
+              id: 1,
+              text: "Space exploration films",
+              color: "#FF5733",
+              relatedTiles: [10, 11, 12, 13],
+              longerDescription: "Contact, Interstellar, The Martian, and Gravity all deal with human exploration of space."
+            },
+            {
+              id: 2,
+              text: "Married couples who've worked together",
+              color: "#33FF57",
+              relatedTiles: [7, 8, 15],
+              longerDescription: "Emily Blunt and John Krasinski are married and worked together on A Quiet Place."
+            },
+            {
+              id: 3,
+              text: "Academy Award nominees for Best Picture",
+              color: "#3357FF",
+              relatedTiles: [11, 12, 13, 14],
+              longerDescription: "Interstellar, The Martian, Gravity, and Arrival were all nominated for Best Picture."
+            },
+            {
+              id: 4,
+              text: "Starred together in space films",
+              color: "#FF33F1",
+              relatedTiles: [5, 6, 13],
+              longerDescription: "Sandra Bullock and George Clooney starred together in Gravity."
+            },
+            {
+              id: 5,
+              text: "First contact with aliens",
+              color: "#33FFF1",
+              relatedTiles: [10, 14, 15],
+              longerDescription: "Contact, Arrival, and A Quiet Place all deal with humanity's first contact with alien life."
+            },
+            {
+              id: 6,
+              text: "Born in Massachusetts",
+              color: "#FFF133",
+              relatedTiles: [4, 8],
+              longerDescription: "Matt Damon and John Krasinski were both born in Massachusetts."
+            },
+            {
+              id: 7,
+              text: "Directed and starred in same film",
+              color: "#8B33FF",
+              relatedTiles: [6, 8, 15, 19],
+              longerDescription: "George Clooney directed and starred in The Midnight Sky, while John Krasinski did the same with A Quiet Place."
+            },
+            {
+              id: 8,
+              text: "Born outside the US",
+              color: "#FF3333",
+              relatedTiles: [7, 9],
+              longerDescription: "Emily Blunt was born in London, England, and Amy Adams was born in Vicenza, Italy."
             }
           ]
         }
