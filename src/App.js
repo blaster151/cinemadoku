@@ -42,6 +42,14 @@ function App() {
 
   useImagePreloader(currentPuzzle);
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   useEffect(() => {
     if (!currentPuzzle) return;
     
@@ -52,12 +60,13 @@ function App() {
     });
     setBoardTiles(initialBoard);
 
-    const initialTiles = currentPuzzle.tiles.map((tile, index) => ({
+    const initialTiles = shuffleArray(currentPuzzle.tiles.map((tile, index) => ({
       ...tile,
       originalSlot: index,
       isPlaced: currentPuzzle.initialPlacements.some(p => p.tileId === tile.id),
       puzzleId: currentPuzzleId
-    }));
+    })));
+    
     setTiles(initialTiles);
 
     return () => {
