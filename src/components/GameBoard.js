@@ -135,7 +135,11 @@ function GameBoard({
     <div className="game-board-section">
       <h2>Game Board</h2>
       <div className="game-board-container">
-        <div className="game-board" ref={boardRef}>
+        <div 
+          className="game-board" 
+          ref={boardRef}
+          onDragOver={(e) => e.preventDefault()}
+        >
           {boardPattern.map((row, rowIndex) => (
             row.map((cellType, cellIndex) => (
               <Cell

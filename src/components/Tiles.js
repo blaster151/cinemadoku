@@ -92,6 +92,7 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
         <div 
           ref={drop}
           className={`tiles-grid ${isOver ? 'is-over' : ''}`}
+          onDragOver={(e) => e.preventDefault()}
         >
           {tiles.map((tile) => (
             <LooseTile

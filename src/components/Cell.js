@@ -8,17 +8,14 @@ function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placed
     drop: (item) => onDrop(item.id, rowIndex, cellIndex),
     canDrop: (item) => {
       if (type === null) return false;
-      if (item.type !== type) {
-        onInvalidDrop?.();
-        return false;
-      }
+      if (item.type !== type) return false;
       return true;
     },
     collect: monitor => ({
       isOver: !!monitor.isOver(),
       canDrop: !!monitor.canDrop(),
     }),
-  }), [rowIndex, cellIndex, onDrop, type, onInvalidDrop]);
+  }), [rowIndex, cellIndex, onDrop, type]);
 
   return (
     <div 

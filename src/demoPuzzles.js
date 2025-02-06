@@ -770,6 +770,407 @@ export const demoPuzzles = [
               relatedTiles: [7, 9],
               longerDescription: "Emily Blunt was born in London, England, and Amy Adams was born in Vicenza, Italy."
             }
-          ]
+          ],
+      connections: [
+        {
+          actorId: 0,
+          movieId: 10,
+          description: "Humphrey Bogart played Rick Blaine, the cynical owner of Rick's Café Américain. Ronald Reagan was originally considered for the role, and the famous 'Here's looking at you, kid' line was improvised during rehearsals."
+        },
+        {
+          actorId: 5,  // Ingrid Bergman
+          movieId: 10,  // Casablanca
+          description: "Ingrid Bergman portrayed Ilsa Lund, a woman torn between two men in wartime Morocco. Bergman was actually taller than Bogart, so he had to stand on blocks during their scenes together."
+        },
+        {
+          actorId: 1,  // Katharine Hepburn
+          movieId: 11,  // The African Queen
+          description: "Katharine Hepburn played Rose Sayer, a proper missionary who ventures down a treacherous river. Nearly everyone in the cast and crew got sick during filming in Africa - except Humphrey Bogart and John Huston, who drank only whiskey."
+        },
+        {
+          actorId: 2,  // Grace Kelly
+          movieId: 12,  // To Catch a Thief
+          description: "Grace Kelly starred as Frances Stevens, a wealthy American tourist on the French Riviera. The film was Kelly's third and final collaboration with Hitchcock before becoming Princess of Monaco."
+        },
+        {
+          actorId: 3,  // Charlie Chaplin
+          movieId: 13,  // Modern Times
+          description: "Charlie Chaplin's Little Tramp character navigates an increasingly mechanized world. The factory's feeding machine sequence took a grueling 38 takes, with Chaplin being fed real food each time."
+        },
+        {
+          actorId: 4,  // Gregory Peck
+          movieId: 14,  // To Kill a Mockingbird
+          description: "Gregory Peck portrayed Atticus Finch, a principled lawyer in the American South. Author Harper Lee was so moved by his performance that she gave Peck her father's pocket watch, which he carried to the Academy Awards."
+        },
+        {
+          actorId: 8,  // Cary Grant
+          movieId: 18,  // North by Northwest
+          description: "Cary Grant played Roger Thornhill, an advertising executive mistaken for a spy. The famous crop-duster scene took nine days to film, though Grant appears on screen for only a few minutes."
+        },
+        {
+          actorId: 7,  // Audrey Hepburn
+          movieId: 17,  // Roman Holiday
+          description: "Audrey Hepburn starred as Princess Ann, a royal who escapes her duties for one magical day. This was Hepburn's first major role, and she won an Oscar for it - the costume designer cut her hair shorter during filming to create the iconic pixie cut."
+        },
+        {
+          actorId: 9,  // Bette Davis
+          movieId: 19,  // All About Eve
+          description: "Bette Davis played Margo Channing, an aging Broadway star. The role was originally intended for Claudette Colbert, who had to drop out after injuring her back - leading to one of Davis's most memorable performances."
+        },
+        {
+          actorId: 6,  // James Stewart
+          movieId: 16,  // Rear Window
+          description: "James Stewart portrayed L.B. Jefferies, a photographer confined to a wheelchair. Hitchcock built the largest indoor set at Paramount at the time, with each apartment having working electricity and plumbing."
+        },
+        {
+          actorId: 5,  // Ingrid Bergman
+          movieId: 15,  // Notorious
+          description: "Ingrid Bergman played Alicia Huberman, an American spy infiltrating a Nazi organization. The famous kiss scene skirted the Production Code's three-second limit by having Grant and Bergman break apart every three seconds while continuing to embrace and talk."
+        },
+        {
+          actorId: 8,  // Cary Grant
+          movieId: 15,  // Notorious
+          description: "Cary Grant portrayed T.R. Devlin, a government agent who recruits Alicia. Hitchcock used innovative camera techniques to film Grant from Bergman's perspective, creating a sense of power dynamics between the characters."
+        },
+        {
+          actorId: 1,  // Katharine Hepburn
+          movieId: 11,  // The African Queen
+          description: "Katharine Hepburn wrote a book about making the film called 'The Making of The African Queen: Or How I Went to Africa with Bogart, Bacall and Huston and Almost Lost My Mind'. She did many of her own stunts despite the challenging conditions."
+        },
+        {
+          actorId: 7,  // Audrey Hepburn
+          movieId: 12,  // To Catch a Thief
+          description: "Audrey Hepburn brought charm and elegance to the role of Regina Lampert. The film's costume designer Edith Head created over 150 costumes for Hepburn, setting new trends in 1960s fashion."
+        },
+        {
+          actorId: 2,  // Grace Kelly
+          movieId: 12,  // To Catch a Thief
+          description: "Grace Kelly played Frances Stevens with such sophistication that Hitchcock called her a 'snow-covered volcano'. The film's stunning French Riviera locations were partly what inspired Kelly's later life as Princess of Monaco."
+        },
+        {
+          actorId: 3,  // Charlie Chaplin
+          movieId: 13,  // Modern Times
+          description: "Charlie Chaplin directed and starred in this film, his last appearance as the Little Tramp. Though it was a 'silent' film made in the sound era, Chaplin used sound effects and composed the famous 'Smile' melody that became a popular song."
+        },
+        {
+          actorId: 4,  // Gregory Peck
+          movieId: 14,  // To Kill a Mockingbird
+          description: "Gregory Peck's portrayal of Atticus Finch was voted the greatest hero in American film by the AFI. Harper Lee visited the set just once and left in tears because Peck reminded her so much of her father."
+        },
+        {
+          actorId: 6,  // James Stewart
+          movieId: 20,  // Vertigo
+          description: "James Stewart played John 'Scottie' Ferguson, a detective with an intense fear of heights. The revolutionary 'vertigo effect' was created by simultaneously zooming in and pulling the camera back, a technique now known as the 'dolly zoom'."
+        },
+        {
+          actorId: 9,  // Bette Davis
+          movieId: 19,  // All About Eve
+          description: "Bette Davis delivered the immortal 'Fasten your seatbelts' line with perfect timing. The film holds the record for most female acting Oscar nominations from a single film, with four."
+        },
+        {
+          actorId: 4,  // Gregory Peck
+          movieId: 20,  // Vertigo
+          description: "Gregory Peck worked with Hitchcock to create the complex character of Scottie Ferguson. The film was considered a commercial and critical disappointment on release but is now often cited as Hitchcock's masterpiece."
+        },
+        {
+          actorId: 6,  // James Stewart
+          movieId: 16,  // Rear Window
+          description: "James Stewart spent the entire shoot confined to a wheelchair to maintain authenticity. The elaborate apartment complex set cost more than most entire feature films of the time to construct."
         }
-      ];
+      ]
+    },
+    {
+      id: 6,
+      name: "Character Actors 2",
+      tiles: [
+        { id: 0, type: "Actor", data: { name: "Philip Seymour Hoffman", birthYear: 1967, birthplace: "Fairport, New York, USA" } },
+        { id: 1, type: "Movie", data: { title: "Magnolia", releaseYear: 1999, director: "Paul Thomas Anderson" } },
+        { id: 2, type: "Actor", data: { name: "John C. Reilly", birthYear: 1965, birthplace: "Chicago, Illinois, USA" } },
+        { id: 3, type: "Movie", data: { title: "The Master", releaseYear: 2012, director: "Paul Thomas Anderson" } },
+        { id: 4, type: "Movie", data: { title: "Boogie Nights", releaseYear: 1997, director: "Paul Thomas Anderson" } },
+        { id: 5, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+        { id: 6, type: "Movie", data: { title: "Dear Evan Hansen", releaseYear: 2021, director: "Stephen Chbosky" } },
+        { id: 7, type: "Actor", data: { name: "Julianne Moore", birthYear: 1960, birthplace: "Fort Bragg, North Carolina, USA" } },
+        { id: 8, type: "Movie", data: { title: "Chicago", releaseYear: 2002, director: "Rob Marshall" } },
+        { id: 9, type: "Actor", data: { name: "Catherine Zeta-Jones", birthYear: 1969, birthplace: "Swansea, Wales, UK" } },
+        { id: 10, type: "Movie", data: { title: "Anchorman", releaseYear: 2004, director: "Adam McKay" } },
+        { id: 11, type: "Movie", data: { title: "Crazy Stupid Love", releaseYear: 2011, director: "Glenn Ficarra, John Requa" } },
+        { id: 12, type: "Actor", data: { name: "Steve Carell", birthYear: 1962, birthplace: "Concord, Massachusetts, USA" } },
+        { id: 13, type: "Movie", data: { title: "Enchanted", releaseYear: 2007, director: "Kevin Lima" } },
+        { id: 14, type: "Movie", data: { title: "A Single Man", releaseYear: 2009, director: "Tom Ford" } },
+        { id: 15, type: "Actor", data: { name: "Patrick Dempsey", birthYear: 1966, birthplace: "Lewiston, Maine, USA" } },
+        { id: 16, type: "Movie", data: { title: "Valentine's Day", releaseYear: 2010, director: "Garry Marshall" } },
+        { id: 17, type: "Actor", data: { name: "Colin Firth", birthYear: 1960, birthplace: "Grayshott, Hampshire, England, UK" } },
+        { id: 18, type: "Movie", data: { title: "Welcome to Marwen", releaseYear: 2018, director: "Robert Zemeckis" } },
+        { id: 19, type: "Movie", data: { title: "Supernova", releaseYear: 2020, director: "Harry Macqueen" } },
+        { id: 20, type: "Actor", data: { name: "Stanley Tucci", birthYear: 1960, birthplace: "Peekskill, New York, USA" } }
+      ],
+      initialPlacements: [
+        { tileId: 0, position: "0-0" },
+        { tileId: 1, position: "0-1" }
+      ],
+      solution: [
+        [0, 1, 2, 8, 9],
+        [3, null, 4, null, 10],
+        [5, 6, 7, 11, 12],
+        [13, null, 14, null, 18],
+        [15, 16, 17, 19, 20]
+      ],
+      hints: [
+        {
+          id: 1,
+          text: "Paul Thomas Anderson collaborators",
+          color: "#FF5733",
+          relatedTiles: [0, 2, 4],
+          longerDescription: "Philip Seymour Hoffman, John C. Reilly, and Boogie Nights all represent key collaborations with director Paul Thomas Anderson."
+        },
+        {
+          id: 2,
+          text: "Musical performers",
+          color: "#33FF57",
+          relatedTiles: [2, 9, 15],
+          longerDescription: "John C. Reilly, Catherine Zeta-Jones, and Patrick Dempsey have all performed in movie musicals - Chicago, Rock of Ages, and Enchanted respectively."
+        },
+        {
+          id: 3,
+          text: "Oscar nominees 2021-2022",
+          color: "#3357FF",
+          relatedTiles: [17, 19, 20],
+          longerDescription: "Colin Firth and Stanley Tucci's performances in Supernova earned critical acclaim, though surprisingly not Oscar nominations."
+        },
+        {
+          id: 4,
+          text: "Born in 1960",
+          color: "#FF33F1",
+          relatedTiles: [7, 17, 20],
+          longerDescription: "Julianne Moore, Colin Firth, and Stanley Tucci were all born in 1960."
+        },
+        {
+          id: 5,
+          text: "Superhero film actors",
+          color: "#33FFF1",
+          relatedTiles: [5, 7, 20],
+          longerDescription: "Amy Adams (DC's Lois Lane), Julianne Moore (Kingsman), and Stanley Tucci (Captain America) have all appeared in superhero/comic book films."
+        },
+        {
+          id: 6,
+          text: "Famous redheads",
+          color: "#FFF133",
+          relatedTiles: [5, 7],
+          longerDescription: "Amy Adams and Julianne Moore are both known for their distinctive red hair."
+        },
+        {
+          id: 7,
+          text: "Played real people",
+          color: "#8B33FF",
+          relatedTiles: [12, 17, 20],
+          longerDescription: "Steve Carell (John du Pont in Foxcatcher), Colin Firth (King George VI), and Stanley Tucci (Stanley Child in Julie & Julia) have all portrayed historical figures."
+        },
+        {
+          id: 8,
+          text: "British-born actors",
+          color: "#FF3333",
+          relatedTiles: [9, 17],
+          longerDescription: "Catherine Zeta-Jones and Colin Firth were both born in the United Kingdom."
+        }
+      ]
+    },
+    {
+      id: 7,
+      name: "Golden Age Hollywood",
+      tiles: [
+        // Actors (10)
+        { id: 0, type: "Actor", data: { name: "Humphrey Bogart", birthYear: 1899, birthplace: "New York City, New York, USA" } },
+        { id: 1, type: "Actor", data: { name: "Katharine Hepburn", birthYear: 1907, birthplace: "Hartford, Connecticut, USA" } },
+        { id: 2, type: "Actor", data: { name: "Grace Kelly", birthYear: 1929, birthplace: "Philadelphia, Pennsylvania, USA" } },
+        { id: 3, type: "Actor", data: { name: "Charlie Chaplin", birthYear: 1889, birthplace: "London, England, UK" } },
+        { id: 4, type: "Actor", data: { name: "Gregory Peck", birthYear: 1916, birthplace: "La Jolla, California, USA" } },
+        { id: 5, type: "Actor", data: { name: "Ingrid Bergman", birthYear: 1915, birthplace: "Stockholm, Sweden" } },
+        { id: 6, type: "Actor", data: { name: "James Stewart", birthYear: 1908, birthplace: "Indiana, Pennsylvania, USA" } },
+        { id: 7, type: "Actor", data: { name: "Audrey Hepburn", birthYear: 1929, birthplace: "Brussels, Belgium" } },
+        { id: 8, type: "Actor", data: { name: "Cary Grant", birthYear: 1904, birthplace: "Bristol, England, UK" } },
+        { id: 9, type: "Actor", data: { name: "Bette Davis", birthYear: 1908, birthplace: "Lowell, Massachusetts, USA" } },
+        
+        // Movies (11)
+        { id: 10, type: "Movie", data: { title: "Casablanca", releaseYear: 1942, director: "Michael Curtiz" } },
+        { id: 11, type: "Movie", data: { title: "The African Queen", releaseYear: 1951, director: "John Huston" } },
+        { id: 12, type: "Movie", data: { title: "To Catch a Thief", releaseYear: 1955, director: "Alfred Hitchcock" } },
+        { id: 13, type: "Movie", data: { title: "Modern Times", releaseYear: 1936, director: "Charlie Chaplin" } },
+        { id: 14, type: "Movie", data: { title: "To Kill a Mockingbird", releaseYear: 1962, director: "Robert Mulligan" } },
+        { id: 15, type: "Movie", data: { title: "Notorious", releaseYear: 1946, director: "Alfred Hitchcock" } },
+        { id: 16, type: "Movie", data: { title: "Rear Window", releaseYear: 1954, director: "Alfred Hitchcock" } },
+        { id: 17, type: "Movie", data: { title: "Roman Holiday", releaseYear: 1953, director: "William Wyler" } },
+        { id: 18, type: "Movie", data: { title: "North by Northwest", releaseYear: 1959, director: "Alfred Hitchcock" } },
+        { id: 19, type: "Movie", data: { title: "All About Eve", releaseYear: 1950, director: "Joseph L. Mankiewicz" } },
+        { id: 20, type: "Movie", data: { title: "Vertigo", releaseYear: 1958, director: "Alfred Hitchcock" } }
+      ],
+      initialPlacements: [
+        { tileId: 0, position: "0-0" },
+        { tileId: 10, position: "0-1" }
+      ],
+      solution: [
+        [0, 10, 5, 15, 8],    // Bogart-Casablanca-Bergman-Notorious-Grant
+        [11, null, 16, null, 18],  // AfricanQueen-RearWindow-NorthByNorthwest
+        [1, 17, 7, 12, 2],    // KHepburn-RomanHoliday-AHepburn-ToCatchAThief-Kelly
+        [13, null, 14, null, 20],  // ModernTimes-Mockingbird-Vertigo
+        [3, 19, 9, 4, 6]     // Chaplin-AllAboutEve-Davis-Peck-Stewart
+      ],
+      hints: [
+        {
+          id: 1,
+          text: "Hitchcock's leading ladies",
+          color: "#FF5733",
+          relatedTiles: [2, 5, 12, 15],
+          longerDescription: "Grace Kelly and Ingrid Bergman were both favorite leading ladies of Alfred Hitchcock, starring in classics like To Catch a Thief and Notorious."
+        },
+        {
+          id: 2,
+          text: "Academy Award winners",
+          color: "#33FF57",
+          relatedTiles: [1, 4, 9, 14],
+          longerDescription: "Katharine Hepburn, Gregory Peck, and Bette Davis all won Academy Awards - Peck notably for To Kill a Mockingbird."
+        },
+        {
+          id: 3,
+          text: "Born in Europe",
+          color: "#3357FF",
+          relatedTiles: [3, 5, 7, 8],
+          longerDescription: "Charlie Chaplin, Ingrid Bergman, Audrey Hepburn, and Cary Grant were all born in Europe."
+        },
+        {
+          id: 4,
+          text: "Films released in the 1950s",
+          color: "#FF33F1",
+          relatedTiles: [11, 12, 17, 20],
+          longerDescription: "The African Queen, To Catch a Thief, Roman Holiday, and Vertigo were all released in the 1950s."
+        },
+        {
+          id: 5,
+          text: "Iconic screen couples",
+          color: "#33FFF1",
+          relatedTiles: [0, 5, 10, 15],
+          longerDescription: "Humphrey Bogart and Ingrid Bergman created magic in both Casablanca and Notorious."
+        },
+        {
+          id: 6,
+          text: "Born in 1908",
+          color: "#FFF133",
+          relatedTiles: [6, 9],
+          longerDescription: "James Stewart and Bette Davis were both born in 1908."
+        },
+        {
+          id: 7,
+          text: "AFI's Greatest Films",
+          color: "#8B33FF",
+          relatedTiles: [10, 14, 18, 20],
+          longerDescription: "Casablanca, To Kill a Mockingbird, North by Northwest, and Vertigo all appear on AFI's list of greatest American films."
+        },
+        {
+          id: 8,
+          text: "Born in Pennsylvania",
+          color: "#FF3333",
+          relatedTiles: [2, 6],
+          longerDescription: "Grace Kelly and James Stewart were both born in Pennsylvania - Philadelphia and Indiana, PA respectively."
+        }
+      ]
+    },
+    {
+      id: 8,
+      name: "Sci-Fi Connections",
+      tiles: [
+        // Actors (10)
+        { id: 0, type: "Actor", data: { name: "Jodie Foster", birthYear: 1962, birthplace: "Los Angeles, California, USA" } },
+        { id: 1, type: "Actor", data: { name: "Matthew McConaughey", birthYear: 1969, birthplace: "Uvalde, Texas, USA" } },
+        { id: 2, type: "Actor", data: { name: "Jessica Chastain", birthYear: 1977, birthplace: "Sacramento, California, USA" } },
+        { id: 3, type: "Actor", data: { name: "Anne Hathaway", birthYear: 1982, birthplace: "Brooklyn, New York, USA" } },
+        { id: 4, type: "Actor", data: { name: "Matt Damon", birthYear: 1970, birthplace: "Cambridge, Massachusetts, USA" } },
+        { id: 5, type: "Actor", data: { name: "Sandra Bullock", birthYear: 1964, birthplace: "Arlington, Virginia, USA" } },
+        { id: 6, type: "Actor", data: { name: "George Clooney", birthYear: 1961, birthplace: "Lexington, Kentucky, USA" } },
+        { id: 7, type: "Actor", data: { name: "Emily Blunt", birthYear: 1983, birthplace: "London, England, UK" } },
+        { id: 8, type: "Actor", data: { name: "John Krasinski", birthYear: 1979, birthplace: "Boston, Massachusetts, USA" } },
+        { id: 9, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+
+        // Movies (11)
+        { id: 10, type: "Movie", data: { title: "Contact", releaseYear: 1997, director: "Robert Zemeckis" } },
+        { id: 11, type: "Movie", data: { title: "Interstellar", releaseYear: 2014, director: "Christopher Nolan" } },
+        { id: 12, type: "Movie", data: { title: "The Martian", releaseYear: 2015, director: "Ridley Scott" } },
+        { id: 13, type: "Movie", data: { title: "Gravity", releaseYear: 2013, director: "Alfonso Cuarón" } },
+        { id: 14, type: "Movie", data: { title: "Arrival", releaseYear: 2016, director: "Denis Villeneuve" } },
+        { id: 15, type: "Movie", data: { title: "A Quiet Place", releaseYear: 2018, director: "John Krasinski" } },
+        { id: 16, type: "Movie", data: { title: "Edge of Tomorrow", releaseYear: 2014, director: "Doug Liman" } },
+        { id: 17, type: "Movie", data: { title: "Passengers", releaseYear: 2016, director: "Morten Tyldum" } },
+        { id: 18, type: "Movie", data: { title: "The Day the Earth Stood Still", releaseYear: 2008, director: "Scott Derrickson" } },
+        { id: 19, type: "Movie", data: { title: "The Midnight Sky", releaseYear: 2020, director: "George Clooney" } },
+        { id: 20, type: "Movie", data: { title: "Sunshine", releaseYear: 2007, director: "Danny Boyle" } }
+      ],
+      solution: [
+        [0, 10, 1, 11, 3],    // Foster-Contact-McConaughey-Interstellar-Hathaway
+        [12, null, 13, null, 14],  // Martian-Gravity-Arrival
+        [4, 16, 7, 15, 8],    // Damon-EdgeOfTomorrow-Blunt-QuietPlace-Krasinski
+        [18, null, 17, null, 19],  // DayEarthStoodStill-Passengers-MidnightSky
+        [9, 14, 5, 13, 6]     // Adams-Arrival-Bullock-Gravity-Clooney
+      ],
+      initialPlacements: [
+        { tileId: 0, position: "0-0" },
+        { tileId: 10, position: "0-1" }
+      ],
+      hints: [
+        {
+          id: 1,
+          text: "Space exploration films",
+          color: "#FF5733",
+          relatedTiles: [10, 11, 12, 13],
+          longerDescription: "Contact, Interstellar, The Martian, and Gravity all deal with human exploration of space."
+        },
+        {
+          id: 2,
+          text: "Married couples who've worked together",
+          color: "#33FF57",
+          relatedTiles: [7, 8, 15],
+          longerDescription: "Emily Blunt and John Krasinski are married and worked together on A Quiet Place."
+        },
+        {
+          id: 3,
+          text: "Academy Award nominees for Best Picture",
+          color: "#3357FF",
+          relatedTiles: [11, 12, 13, 14],
+          longerDescription: "Interstellar, The Martian, Gravity, and Arrival were all nominated for Best Picture."
+        },
+        {
+          id: 4,
+          text: "Starred together in space films",
+          color: "#FF33F1",
+          relatedTiles: [5, 6, 13],
+          longerDescription: "Sandra Bullock and George Clooney starred together in Gravity."
+        },
+        {
+          id: 5,
+          text: "First contact with aliens",
+          color: "#33FFF1",
+          relatedTiles: [10, 14, 15],
+          longerDescription: "Contact, Arrival, and A Quiet Place all deal with humanity's first contact with alien life."
+        },
+        {
+          id: 6,
+          text: "Born in Massachusetts",
+          color: "#FFF133",
+          relatedTiles: [4, 8],
+          longerDescription: "Matt Damon and John Krasinski were both born in Massachusetts."
+        },
+        {
+          id: 7,
+          text: "Directed and starred in same film",
+          color: "#8B33FF",
+          relatedTiles: [6, 8, 15, 19],
+          longerDescription: "George Clooney directed and starred in The Midnight Sky, while John Krasinski did the same with A Quiet Place."
+        },
+        {
+          id: 8,
+          text: "Born outside the US",
+          color: "#FF3333",
+          relatedTiles: [7, 9],
+          longerDescription: "Emily Blunt was born in London, England, and Amy Adams was born in Vicenza, Italy."
+        }
+      ]
+    }
+  ];
