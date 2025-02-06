@@ -1,4 +1,10 @@
+.hints-section {
+  width: 100%;  /* Take up full width */
+  box-sizing: border-box;  /* Include padding in width calculation */
+}
+
 .hints-container {
+  width: 100%;
   background: none;
   border-radius: 0;
   box-shadow: none;
@@ -6,22 +12,24 @@
 }
 
 .hints-list {
+  width: 100%;
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0px;
+  gap: 0px;  /* Remove gap entirely */
 }
 
 .hint-item {
   display: flex !important;
-  align-items: flex-start !important;
+  align-items: center !important;  /* Center align for better compact layout */
   gap: 8px !important;
-  padding: 4px 8px !important;
+  padding: 0px 8px !important;  /* Remove vertical padding */
   cursor: pointer;
   border-radius: 4px;
   color: var(--color-charcoal);
+  height: 24px;  /* Fixed height for consistency */
 }
 
 .hint-color {

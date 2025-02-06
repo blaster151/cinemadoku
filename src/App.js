@@ -10,6 +10,7 @@ import { demoPuzzles } from './demoPuzzles';
 import './App.css';
 import { useImagePreloader } from './hooks/useImagePreloader';
 import ThemeSelector from './components/ThemeSelector';
+import { themes } from './themes';
 
 function App() {
   const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
@@ -51,6 +52,28 @@ function App() {
       setActiveHintColor(null);
     };
   }, [currentPuzzleId, currentPuzzle]);
+
+  // Apply theme styles
+  useEffect(() => {
+    const theme = themes[currentTheme];
+    document.documentElement.style.setProperty('--color-dark-gray', theme.colors.darkGray);
+    document.documentElement.style.setProperty('--color-blue-gray', theme.colors.blueGray);
+    document.documentElement.style.setProperty('--color-light', theme.colors.light);
+    document.documentElement.style.setProperty('--color-charcoal', theme.colors.charcoal);
+    document.documentElement.style.setProperty('--font-heading', theme.fonts.heading);
+    document.documentElement.style.setProperty('--font-body', theme.fonts.body);
+    document.body.style.background = theme.background;
+  }, [currentTheme]);
+
+  // Add Google Fonts link dynamically
+  useEffect(() => {
+    const theme = themes[currentTheme];
+    const link = document.createElement('link');
+    link.href = `https://fonts.googleapis.com/css2?family=${theme.fonts.heading.split("'")[1]}:wght@400;700&family=${theme.fonts.body.split("'")[1]}:wght@400;500&display=swap`;
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+    return () => document.head.removeChild(link);
+  }, [currentTheme]);
 
   const handleTilePlacement = useCallback((tileId, rowIndex, cellIndex) => {
     const placedTile = tiles.find(tile => tile.id === tileId);
@@ -124,11 +147,13 @@ function App() {
   };
 
   const handleHintHover = useCallback((color) => {
-    setActiveHintColor(color);
+    // Only update if the color is actually changing
+    setActiveHintColor(prev => prev !== color ? color : prev);
   }, []);
 
   const handleHintLeave = useCallback(() => {
-    setActiveHintColor(null);
+    // Only update if there was an active color
+    setActiveHintColor(prev => prev !== null ? null : prev);
   }, []);
 
   const handleTileReturnToSlot = useCallback((tileId, slotIndex) => {
@@ -163,7 +188,7 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <h1 className="game-title">Cinemadoku</h1>
+          <img src="/images/themes/2/logo.jpg" alt="Cinemadoku" className="logo" />
           <div className="puzzle-selector">
             {[1, 2, 3, 4, 5, 6, 7, 8].map(id => (
               <button 
@@ -215,13 +240,15 @@ function App() {
             />
             <div className="hints-section">
               <h2>Hints</h2>
-              <div className="hints-container">
-                <Hints 
-                  hints={currentPuzzle.hints}
-                  onHintHover={handleHintHover}
-                  onHintLeave={handleHintLeave}
-                  activeHint={activeHintColor}
-                />
+              <div className="inner-container">
+                <div className="hints-container">
+                  <Hints 
+                    hints={currentPuzzle.hints}
+                    onHintHover={handleHintHover}
+                    onHintLeave={handleHintLeave}
+                    activeHint={activeHintColor}
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -169,18 +169,20 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
   }));
 
   return (
-    <div className="tiles-container">
+    <div className="tiles-section">
       <h2>Tiles</h2>
-      <div className="tiles-grid">
-        {slots.map(({ index, tile }) => (
-          <TileSlot 
-            key={tile ? `puzzle${puzzleId}-tile${tile.id}` : `puzzle${puzzleId}-empty-slot-${index}`}
-            index={index} 
-            tile={tile} 
-            onTileDrop={onTileDrop}
-            themeId={themeId}
-          />
-        ))}
+      <div className="inner-container">
+        <div className="tiles-grid">
+          {slots.map(({ index, tile }) => (
+            <TileSlot 
+              key={tile ? `puzzle${puzzleId}-tile${tile.id}` : `puzzle${puzzleId}-empty-slot-${index}`}
+              index={index} 
+              tile={tile} 
+              onTileDrop={onTileDrop}
+              themeId={themeId}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
