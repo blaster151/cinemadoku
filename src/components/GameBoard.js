@@ -17,6 +17,7 @@ function GameBoard({
   looseTiles = [],
   themeId = '1',
   onAutosolve,
+  onTileRemoval,
 }) {
   const boardRef = useRef(null);
   const tilesRef = useRef(null);
@@ -158,6 +159,7 @@ function GameBoard({
             ))
           ))}
         </div>
+
         <div className="button-container">
           <button 
             className={`check-solution-button ${!isBoardComplete() ? 'incomplete' : ''}`}

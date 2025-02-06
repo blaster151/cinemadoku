@@ -20,16 +20,6 @@ function Cell({ type, rowIndex, cellIndex, onDrop, onInvalidDrop, onSwap, placed
     }),
   }), [rowIndex, cellIndex, onDrop, type, onInvalidDrop]);
 
-  const handleDragStart = (e) => {
-    const data = {
-      tile: placedTile,
-      fromBoard: true,
-      rowIndex,
-      cellIndex
-    };
-    e.dataTransfer.setData('application/json', JSON.stringify(data));
-  };
-
   return (
     <div 
       ref={drop}

@@ -67,7 +67,7 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
     accept: 'tile',
     drop: (item) => {
       if (item.fromBoard) {
-        onTileRemoval(item.tile.id);
+        onTileRemoval(item.id);
       }
       return undefined;
     },
@@ -177,20 +177,6 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
     });
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    try {
-      const data = e.dataTransfer.getData('application/json');
-      if (data) {
-        const tileData = JSON.parse(data);
-        if (tileData.fromBoard) {
-          onTileRemoval(tileData.tile.id);
-        }
-      }
-    } catch (error) {
-      console.log('Invalid drop data');
-    }
-  };
 
   // Expose handleAutosolve to parent through ref
   useImperativeHandle(ref, () => ({
@@ -204,8 +190,6 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
         <div 
           ref={drop}
           className={`tiles-grid ${isOver ? 'is-over' : ''}`}
-          onDrop={handleDrop}
-          onDragOver={(e) => e.preventDefault()}
         >
           {tiles.map((tile) => (
             <LooseTile

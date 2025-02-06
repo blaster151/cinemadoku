@@ -3,14 +3,19 @@ import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
 
-function LooseTile({ tile, themeId }) {
+function LooseTile({ tile, themeId, fromBoard }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'tile',
-    item: { id: tile.id, type: tile.type, data: tile.data },
+    item: { 
+      id: tile.id, 
+      type: tile.type, 
+      data: tile.data,
+      fromBoard: fromBoard
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }), [tile]);
+  }), [tile, fromBoard]);
 
   const [imageLoaded, setImageLoaded] = useState(false);
 

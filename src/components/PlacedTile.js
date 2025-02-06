@@ -10,7 +10,12 @@ function PlacedTile({ tile, themeId }) {
       // Add dragging class when drag starts
       const element = document.querySelector(`[data-tile-id="${tile.id}"]`);
       if (element) element.classList.add('dragging');
-      return { id: tile.id, type: tile.type, data: tile.data };
+      return { 
+        id: tile.id, 
+        type: tile.type, 
+        data: tile.data,
+        fromBoard: true
+      };
     },
     end: (item, monitor) => {
       // Remove dragging class when drag ends

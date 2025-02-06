@@ -260,6 +260,7 @@ function App() {
               puzzleId={currentPuzzleId}
               themeId={currentTheme}
               key={`tiles-${currentTheme}`}
+              onTileRemoval={handleTileRemoval}
             />
             <div className="hints-section">
               <h2>Hints</h2>
