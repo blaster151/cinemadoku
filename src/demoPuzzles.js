@@ -674,212 +674,6 @@ export const demoPuzzles = [
           ]
         },
         {
-          id: 8,
-          name: "Sci-Fi Connections",
-          tiles: [
-            // Actors (10)
-            { id: 0, type: "Actor", data: { name: "Jodie Foster", birthYear: 1962, birthplace: "Los Angeles, California, USA" } },
-            { id: 1, type: "Actor", data: { name: "Matthew McConaughey", birthYear: 1969, birthplace: "Uvalde, Texas, USA" } },
-            { id: 2, type: "Actor", data: { name: "Jessica Chastain", birthYear: 1977, birthplace: "Sacramento, California, USA" } },
-            { id: 3, type: "Actor", data: { name: "Anne Hathaway", birthYear: 1982, birthplace: "Brooklyn, New York, USA" } },
-            { id: 4, type: "Actor", data: { name: "Matt Damon", birthYear: 1970, birthplace: "Cambridge, Massachusetts, USA" } },
-            { id: 5, type: "Actor", data: { name: "Sandra Bullock", birthYear: 1964, birthplace: "Arlington, Virginia, USA" } },
-            { id: 6, type: "Actor", data: { name: "George Clooney", birthYear: 1961, birthplace: "Lexington, Kentucky, USA" } },
-            { id: 7, type: "Actor", data: { name: "Emily Blunt", birthYear: 1983, birthplace: "London, England, UK" } },
-            { id: 8, type: "Actor", data: { name: "John Krasinski", birthYear: 1979, birthplace: "Boston, Massachusetts, USA" } },
-            { id: 9, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
-
-            // Movies (11)
-            { id: 10, type: "Movie", data: { title: "Contact", releaseYear: 1997, director: "Robert Zemeckis" } },
-            { id: 11, type: "Movie", data: { title: "Interstellar", releaseYear: 2014, director: "Christopher Nolan" } },
-            { id: 12, type: "Movie", data: { title: "The Martian", releaseYear: 2015, director: "Ridley Scott" } },
-            { id: 13, type: "Movie", data: { title: "Gravity", releaseYear: 2013, director: "Alfonso Cuarón" } },
-            { id: 14, type: "Movie", data: { title: "Arrival", releaseYear: 2016, director: "Denis Villeneuve" } },
-            { id: 15, type: "Movie", data: { title: "A Quiet Place", releaseYear: 2018, director: "John Krasinski" } },
-            { id: 16, type: "Movie", data: { title: "Edge of Tomorrow", releaseYear: 2014, director: "Doug Liman" } },
-            { id: 17, type: "Movie", data: { title: "Passengers", releaseYear: 2016, director: "Morten Tyldum" } },
-            { id: 18, type: "Movie", data: { title: "The Day the Earth Stood Still", releaseYear: 2008, director: "Scott Derrickson" } },
-            { id: 19, type: "Movie", data: { title: "The Midnight Sky", releaseYear: 2020, director: "George Clooney" } },
-            { id: 20, type: "Movie", data: { title: "Sunshine", releaseYear: 2007, director: "Danny Boyle" } }
-          ],
-          solution: [
-            [0, 10, 1, 11, 3],    // Foster-Contact-McConaughey-Interstellar-Hathaway
-            [12, null, 13, null, 14],  // Martian-Gravity-Arrival
-            [4, 16, 7, 15, 8],    // Damon-EdgeOfTomorrow-Blunt-QuietPlace-Krasinski
-            [18, null, 17, null, 19],  // DayEarthStoodStill-Passengers-MidnightSky
-            [9, 14, 5, 13, 6]     // Adams-Arrival-Bullock-Gravity-Clooney
-          ],
-          initialPlacements: [
-            { tileId: 0, position: "0-0" },
-            { tileId: 10, position: "0-1" }
-          ],
-          hints: [
-            {
-              id: 1,
-              text: "Space exploration films",
-              color: "#FF5733",
-              relatedTiles: [10, 11, 12, 13],
-              longerDescription: "Contact, Interstellar, The Martian, and Gravity all deal with human exploration of space."
-            },
-            {
-              id: 2,
-              text: "Married couples who've worked together",
-              color: "#33FF57",
-              relatedTiles: [7, 8, 15],
-              longerDescription: "Emily Blunt and John Krasinski are married and worked together on A Quiet Place."
-            },
-            {
-              id: 3,
-              text: "Academy Award nominees for Best Picture",
-              color: "#3357FF",
-              relatedTiles: [11, 12, 13, 14],
-              longerDescription: "Interstellar, The Martian, Gravity, and Arrival were all nominated for Best Picture."
-            },
-            {
-              id: 4,
-              text: "Starred together in space films",
-              color: "#FF33F1",
-              relatedTiles: [5, 6, 13],
-              longerDescription: "Sandra Bullock and George Clooney starred together in Gravity."
-            },
-            {
-              id: 5,
-              text: "First contact with aliens",
-              color: "#33FFF1",
-              relatedTiles: [10, 14, 15],
-              longerDescription: "Contact, Arrival, and A Quiet Place all deal with humanity's first contact with alien life."
-            },
-            {
-              id: 6,
-              text: "Born in Massachusetts",
-              color: "#FFF133",
-              relatedTiles: [4, 8],
-              longerDescription: "Matt Damon and John Krasinski were both born in Massachusetts."
-            },
-            {
-              id: 7,
-              text: "Directed and starred in same film",
-              color: "#8B33FF",
-              relatedTiles: [6, 8, 15, 19],
-              longerDescription: "George Clooney directed and starred in The Midnight Sky, while John Krasinski did the same with A Quiet Place."
-            },
-            {
-              id: 8,
-              text: "Born outside the US",
-              color: "#FF3333",
-              relatedTiles: [7, 9],
-              longerDescription: "Emily Blunt was born in London, England, and Amy Adams was born in Vicenza, Italy."
-            }
-          ],
-      connections: [
-        {
-          actorId: 0,
-          movieId: 10,
-          description: "Humphrey Bogart played Rick Blaine, the cynical owner of Rick's Café Américain. Ronald Reagan was originally considered for the role, and the famous 'Here's looking at you, kid' line was improvised during rehearsals."
-        },
-        {
-          actorId: 5,  // Ingrid Bergman
-          movieId: 10,  // Casablanca
-          description: "Ingrid Bergman portrayed Ilsa Lund, a woman torn between two men in wartime Morocco. Bergman was actually taller than Bogart, so he had to stand on blocks during their scenes together."
-        },
-        {
-          actorId: 1,  // Katharine Hepburn
-          movieId: 11,  // The African Queen
-          description: "Katharine Hepburn played Rose Sayer, a proper missionary who ventures down a treacherous river. Nearly everyone in the cast and crew got sick during filming in Africa - except Humphrey Bogart and John Huston, who drank only whiskey."
-        },
-        {
-          actorId: 2,  // Grace Kelly
-          movieId: 12,  // To Catch a Thief
-          description: "Grace Kelly starred as Frances Stevens, a wealthy American tourist on the French Riviera. The film was Kelly's third and final collaboration with Hitchcock before becoming Princess of Monaco."
-        },
-        {
-          actorId: 3,  // Charlie Chaplin
-          movieId: 13,  // Modern Times
-          description: "Charlie Chaplin's Little Tramp character navigates an increasingly mechanized world. The factory's feeding machine sequence took a grueling 38 takes, with Chaplin being fed real food each time."
-        },
-        {
-          actorId: 4,  // Gregory Peck
-          movieId: 14,  // To Kill a Mockingbird
-          description: "Gregory Peck portrayed Atticus Finch, a principled lawyer in the American South. Author Harper Lee was so moved by his performance that she gave Peck her father's pocket watch, which he carried to the Academy Awards."
-        },
-        {
-          actorId: 8,  // Cary Grant
-          movieId: 18,  // North by Northwest
-          description: "Cary Grant played Roger Thornhill, an advertising executive mistaken for a spy. The famous crop-duster scene took nine days to film, though Grant appears on screen for only a few minutes."
-        },
-        {
-          actorId: 7,  // Audrey Hepburn
-          movieId: 17,  // Roman Holiday
-          description: "Audrey Hepburn starred as Princess Ann, a royal who escapes her duties for one magical day. This was Hepburn's first major role, and she won an Oscar for it - the costume designer cut her hair shorter during filming to create the iconic pixie cut."
-        },
-        {
-          actorId: 9,  // Bette Davis
-          movieId: 19,  // All About Eve
-          description: "Bette Davis played Margo Channing, an aging Broadway star. The role was originally intended for Claudette Colbert, who had to drop out after injuring her back - leading to one of Davis's most memorable performances."
-        },
-        {
-          actorId: 6,  // James Stewart
-          movieId: 16,  // Rear Window
-          description: "James Stewart portrayed L.B. Jefferies, a photographer confined to a wheelchair. Hitchcock built the largest indoor set at Paramount at the time, with each apartment having working electricity and plumbing."
-        },
-        {
-          actorId: 5,  // Ingrid Bergman
-          movieId: 15,  // Notorious
-          description: "Ingrid Bergman played Alicia Huberman, an American spy infiltrating a Nazi organization. The famous kiss scene skirted the Production Code's three-second limit by having Grant and Bergman break apart every three seconds while continuing to embrace and talk."
-        },
-        {
-          actorId: 8,  // Cary Grant
-          movieId: 15,  // Notorious
-          description: "Cary Grant portrayed T.R. Devlin, a government agent who recruits Alicia. Hitchcock used innovative camera techniques to film Grant from Bergman's perspective, creating a sense of power dynamics between the characters."
-        },
-        {
-          actorId: 1,  // Katharine Hepburn
-          movieId: 11,  // The African Queen
-          description: "Katharine Hepburn wrote a book about making the film called 'The Making of The African Queen: Or How I Went to Africa with Bogart, Bacall and Huston and Almost Lost My Mind'. She did many of her own stunts despite the challenging conditions."
-        },
-        {
-          actorId: 7,  // Audrey Hepburn
-          movieId: 12,  // To Catch a Thief
-          description: "Audrey Hepburn brought charm and elegance to the role of Regina Lampert. The film's costume designer Edith Head created over 150 costumes for Hepburn, setting new trends in 1960s fashion."
-        },
-        {
-          actorId: 2,  // Grace Kelly
-          movieId: 12,  // To Catch a Thief
-          description: "Grace Kelly played Frances Stevens with such sophistication that Hitchcock called her a 'snow-covered volcano'. The film's stunning French Riviera locations were partly what inspired Kelly's later life as Princess of Monaco."
-        },
-        {
-          actorId: 3,  // Charlie Chaplin
-          movieId: 13,  // Modern Times
-          description: "Charlie Chaplin directed and starred in this film, his last appearance as the Little Tramp. Though it was a 'silent' film made in the sound era, Chaplin used sound effects and composed the famous 'Smile' melody that became a popular song."
-        },
-        {
-          actorId: 4,  // Gregory Peck
-          movieId: 14,  // To Kill a Mockingbird
-          description: "Gregory Peck's portrayal of Atticus Finch was voted the greatest hero in American film by the AFI. Harper Lee visited the set just once and left in tears because Peck reminded her so much of her father."
-        },
-        {
-          actorId: 6,  // James Stewart
-          movieId: 20,  // Vertigo
-          description: "James Stewart played John 'Scottie' Ferguson, a detective with an intense fear of heights. The revolutionary 'vertigo effect' was created by simultaneously zooming in and pulling the camera back, a technique now known as the 'dolly zoom'."
-        },
-        {
-          actorId: 9,  // Bette Davis
-          movieId: 19,  // All About Eve
-          description: "Bette Davis delivered the immortal 'Fasten your seatbelts' line with perfect timing. The film holds the record for most female acting Oscar nominations from a single film, with four."
-        },
-        {
-          actorId: 4,  // Gregory Peck
-          movieId: 20,  // Vertigo
-          description: "Gregory Peck worked with Hitchcock to create the complex character of Scottie Ferguson. The film was considered a commercial and critical disappointment on release but is now often cited as Hitchcock's masterpiece."
-        },
-        {
-          actorId: 6,  // James Stewart
-          movieId: 16,  // Rear Window
-          description: "James Stewart spent the entire shoot confined to a wheelchair to maintain authenticity. The elaborate apartment complex set cost more than most entire feature films of the time to construct."
-        }
-      ]
-    },
-    {
       id: 6,
       name: "Character Actors 2",
       tiles: [
@@ -1076,100 +870,100 @@ export const demoPuzzles = [
     },
     {
       id: 8,
-      name: "Sci-Fi Connections",
+      name: "Contemporary Connections",
       tiles: [
-        // Actors (10)
-        { id: 0, type: "Actor", data: { name: "Jodie Foster", birthYear: 1962, birthplace: "Los Angeles, California, USA" } },
-        { id: 1, type: "Actor", data: { name: "Matthew McConaughey", birthYear: 1969, birthplace: "Uvalde, Texas, USA" } },
-        { id: 2, type: "Actor", data: { name: "Jessica Chastain", birthYear: 1977, birthplace: "Sacramento, California, USA" } },
-        { id: 3, type: "Actor", data: { name: "Anne Hathaway", birthYear: 1982, birthplace: "Brooklyn, New York, USA" } },
-        { id: 4, type: "Actor", data: { name: "Matt Damon", birthYear: 1970, birthplace: "Cambridge, Massachusetts, USA" } },
-        { id: 5, type: "Actor", data: { name: "Sandra Bullock", birthYear: 1964, birthplace: "Arlington, Virginia, USA" } },
-        { id: 6, type: "Actor", data: { name: "George Clooney", birthYear: 1961, birthplace: "Lexington, Kentucky, USA" } },
-        { id: 7, type: "Actor", data: { name: "Emily Blunt", birthYear: 1983, birthplace: "London, England, UK" } },
-        { id: 8, type: "Actor", data: { name: "John Krasinski", birthYear: 1979, birthplace: "Boston, Massachusetts, USA" } },
-        { id: 9, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+        // Actors (0-8)
+        { id: 0, type: "Actor", data: { name: "Leonardo DiCaprio", birthYear: 1974, birthplace: "Los Angeles, California, USA" } },
+        { id: 1, type: "Actor", data: { name: "Amy Adams", birthYear: 1974, birthplace: "Vicenza, Italy" } },
+        { id: 2, type: "Actor", data: { name: "Christian Bale", birthYear: 1974, birthplace: "Haverfordwest, Wales, UK" } },
+        { id: 3, type: "Actor", data: { name: "Emma Stone", birthYear: 1988, birthplace: "Scottsdale, Arizona, USA" } },
+        { id: 4, type: "Actor", data: { name: "Ryan Gosling", birthYear: 1980, birthplace: "London, Ontario, Canada" } },
+        { id: 5, type: "Actor", data: { name: "Jennifer Lawrence", birthYear: 1990, birthplace: "Indian Hills, Kentucky, USA" } },
+        { id: 6, type: "Actor", data: { name: "Bradley Cooper", birthYear: 1975, birthplace: "Philadelphia, Pennsylvania, USA" } },
+        { id: 7, type: "Actor", data: { name: "Margot Robbie", birthYear: 1990, birthplace: "Gold Coast, Australia" } },
+        { id: 8, type: "Actor", data: { name: "Cate Blanchett", birthYear: 1969, birthplace: "Melbourne, Australia" } },
 
-        // Movies (11)
-        { id: 10, type: "Movie", data: { title: "Contact", releaseYear: 1997, director: "Robert Zemeckis" } },
-        { id: 11, type: "Movie", data: { title: "Interstellar", releaseYear: 2014, director: "Christopher Nolan" } },
-        { id: 12, type: "Movie", data: { title: "The Martian", releaseYear: 2015, director: "Ridley Scott" } },
-        { id: 13, type: "Movie", data: { title: "Gravity", releaseYear: 2013, director: "Alfonso Cuarón" } },
-        { id: 14, type: "Movie", data: { title: "Arrival", releaseYear: 2016, director: "Denis Villeneuve" } },
-        { id: 15, type: "Movie", data: { title: "A Quiet Place", releaseYear: 2018, director: "John Krasinski" } },
-        { id: 16, type: "Movie", data: { title: "Edge of Tomorrow", releaseYear: 2014, director: "Doug Liman" } },
-        { id: 17, type: "Movie", data: { title: "Passengers", releaseYear: 2016, director: "Morten Tyldum" } },
-        { id: 18, type: "Movie", data: { title: "The Day the Earth Stood Still", releaseYear: 2008, director: "Scott Derrickson" } },
-        { id: 19, type: "Movie", data: { title: "The Midnight Sky", releaseYear: 2020, director: "George Clooney" } },
-        { id: 20, type: "Movie", data: { title: "Sunshine", releaseYear: 2007, director: "Danny Boyle" } }
+        // Movies (9-20)
+        { id: 9, type: "Movie", data: { title: "Inception", releaseYear: 2010, director: "Christopher Nolan" } },
+        { id: 10, type: "Movie", data: { title: "American Hustle", releaseYear: 2013, director: "David O. Russell" } },
+        { id: 11, type: "Movie", data: { title: "La La Land", releaseYear: 2016, director: "Damien Chazelle" } },
+        { id: 12, type: "Movie", data: { title: "The Fighter", releaseYear: 2010, director: "David O. Russell" } },
+        { id: 13, type: "Movie", data: { title: "Silver Linings Playbook", releaseYear: 2012, director: "David O. Russell" } },
+        { id: 14, type: "Movie", data: { title: "The Wolf of Wall Street", releaseYear: 2013, director: "Martin Scorsese" } },
+        { id: 15, type: "Movie", data: { title: "Vice", releaseYear: 2018, director: "Adam McKay" } },
+        { id: 16, type: "Movie", data: { title: "Joker", releaseYear: 2019, director: "Todd Phillips" } },
+        { id: 17, type: "Movie", data: { title: "Don't Look Up", releaseYear: 2021, director: "Adam McKay" } },
+        { id: 18, type: "Movie", data: { title: "Barbie", releaseYear: 2023, director: "Greta Gerwig" } },
+        { id: 19, type: "Movie", data: { title: "Tar", releaseYear: 2022, director: "Todd Field" } },
+        { id: 20, type: "Movie", data: { title: "The Master", releaseYear: 2012, director: "Paul Thomas Anderson" } }
       ],
       solution: [
-        [0, 10, 1, 11, 3],    // Foster-Contact-McConaughey-Interstellar-Hathaway
-        [12, null, 13, null, 14],  // Martian-Gravity-Arrival
-        [4, 16, 7, 15, 8],    // Damon-EdgeOfTomorrow-Blunt-QuietPlace-Krasinski
-        [18, null, 17, null, 19],  // DayEarthStoodStill-Passengers-MidnightSky
-        [9, 14, 5, 13, 6]     // Adams-Arrival-Bullock-Gravity-Clooney
+        [0, 9, 2, 12, 6],     // DiCaprio-Inception-Bale-Fighter-Cooper
+        [14, null, 13, null, 20],  // WolfWallStreet-SilverLinings-Master
+        [7, 18, 4, 11, 3],     // Robbie-Barbie-Gosling-LaLaLand-Stone
+        [15, null, 16, null, 17],  // Vice-Joker-DontLookUp
+        [1, 10, 5, 19, 8]      // Adams-AmericanHustle-Lawrence-Tar-Blanchett
       ],
       initialPlacements: [
         { tileId: 0, position: "0-0" },
-        { tileId: 10, position: "0-1" }
+        { tileId: 9, position: "0-1" }
       ],
       hints: [
         {
           id: 1,
-          text: "Space exploration films",
+          text: "David O. Russell films",
           color: "#FF5733",
-          relatedTiles: [10, 11, 12, 13],
-          longerDescription: "Contact, Interstellar, The Martian, and Gravity all deal with human exploration of space."
+          relatedTiles: [10, 12, 13],
+          longerDescription: "The Fighter, Silver Linings Playbook, and American Hustle were all directed by David O. Russell, showcasing his distinctive style of character-driven storytelling."
         },
         {
           id: 2,
-          text: "Married couples who've worked together",
+          text: "Oscar-winning performances",
           color: "#33FF57",
-          relatedTiles: [7, 8, 15],
-          longerDescription: "Emily Blunt and John Krasinski are married and worked together on A Quiet Place."
+          relatedTiles: [2, 3, 8],
+          longerDescription: "Christian Bale (The Fighter), Emma Stone (La La Land), and Cate Blanchett (Blue Jasmine) have all won Academy Awards for Best Actor/Actress."
         },
         {
           id: 3,
-          text: "Academy Award nominees for Best Picture",
+          text: "Born in 1974",
           color: "#3357FF",
-          relatedTiles: [11, 12, 13, 14],
-          longerDescription: "Interstellar, The Martian, Gravity, and Arrival were all nominated for Best Picture."
+          relatedTiles: [0, 1, 2, 7],
+          longerDescription: "Leonardo DiCaprio, Amy Adams, Christian Bale, and Margot Robbie were all born in 1974."
         },
         {
           id: 4,
-          text: "Starred together in space films",
+          text: "Musical talents",
           color: "#FF33F1",
-          relatedTiles: [5, 6, 13],
-          longerDescription: "Sandra Bullock and George Clooney starred together in Gravity."
+          relatedTiles: [3, 4, 11],
+          longerDescription: "Emma Stone and Ryan Gosling showcased their singing and dancing abilities in La La Land."
         },
         {
           id: 5,
-          text: "First contact with aliens",
+          text: "Born outside the US",
           color: "#33FFF1",
-          relatedTiles: [10, 14, 15],
-          longerDescription: "Contact, Arrival, and A Quiet Place all deal with humanity's first contact with alien life."
+          relatedTiles: [2, 6, 8],
+          longerDescription: "Christian Bale (Wales), Jennifer Lawrence (USA), and Cate Blanchett (Australia) were all born outside the United States."
         },
         {
           id: 6,
-          text: "Born in Massachusetts",
+          text: "Adam McKay collaborations",
           color: "#FFF133",
-          relatedTiles: [4, 8],
-          longerDescription: "Matt Damon and John Krasinski were both born in Massachusetts."
+          relatedTiles: [5, 15, 17, 19],
+          longerDescription: "Leonardo DiCaprio and Jennifer Lawrence starred together in Don't Look Up, while Christian Bale transformed for Vice - both directed by Adam McKay."
         },
         {
           id: 7,
-          text: "Directed and starred in same film",
+          text: "2023 blockbusters",
           color: "#8B33FF",
-          relatedTiles: [6, 8, 15, 19],
-          longerDescription: "George Clooney directed and starred in The Midnight Sky, while John Krasinski did the same with A Quiet Place."
+          relatedTiles: [6, 18, 19],
+          longerDescription: "Margot Robbie starred in Barbie while Cate Blanchett received acclaim for Tar, both major films of recent years."
         },
         {
           id: 8,
-          text: "Born outside the US",
+          text: "Multiple collaborations",
           color: "#FF3333",
-          relatedTiles: [7, 9],
-          longerDescription: "Emily Blunt was born in London, England, and Amy Adams was born in Vicenza, Italy."
+          relatedTiles: [4, 7, 13],
+          longerDescription: "Christian Bale and Bradley Cooper have worked together multiple times, including in Silver Linings Playbook."
         }
       ]
     }
