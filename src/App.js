@@ -11,13 +11,26 @@ import './App.css';
 import { useImagePreloader } from './hooks/useImagePreloader';
 import ThemeSelector from './components/ThemeSelector';
 import { themes } from './themes';
+import { FEATURES } from './config';
 
 function App() {
-  const [currentPuzzleId, setCurrentPuzzleId] = useState(1);
+  // Define available puzzles once, at the top level of the component
+  const availablePuzzles = FEATURES.DEMO_MODE 
+    ? demoPuzzles.filter(p => [6, 8].includes(p.id))
+    : demoPuzzles;
+
+  // Use availablePuzzles for initial puzzle ID
+  const getInitialPuzzleId = () => {
+    return availablePuzzles[0]?.id || 1;
+  };
+
+  const [currentPuzzleId, setCurrentPuzzleId] = useState(getInitialPuzzleId);
   const [tiles, setTiles] = useState([]);
   const [boardTiles, setBoardTiles] = useState({});
   const [activeHintColor, setActiveHintColor] = useState(null);
   const [currentTheme, setCurrentTheme] = useState(() => {
+    // In demo mode, always use Classic theme
+    if (FEATURES.DEMO_MODE) return '1';
     return localStorage.getItem('selectedTheme') || '1';
   });
 
@@ -147,14 +160,16 @@ function App() {
   };
 
   const handleHintHover = useCallback((color) => {
-    // Only update if the color is actually changing
-    setActiveHintColor(prev => prev !== color ? color : prev);
-  }, []);
+    if (activeHintColor !== color) {
+      setActiveHintColor(color);
+    }
+  }, [activeHintColor]);
 
   const handleHintLeave = useCallback(() => {
-    // Only update if there was an active color
-    setActiveHintColor(prev => prev !== null ? null : prev);
-  }, []);
+    if (activeHintColor !== null) {
+      setActiveHintColor(null);
+    }
+  }, [activeHintColor]);
 
   const handleTileReturnToSlot = useCallback((tileId, slotIndex) => {
     setBoardTiles(prev => {
@@ -188,18 +203,30 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          <img src="/images/themes/2/logo.jpg" alt="Cinemadoku" className="logo" />
+          {FEATURES.DEMO_MODE ? (
+            <h1 className="game-title">Cinemadoku</h1>
+          ) : (
+            <img src="/images/themes/2/logo.jpg" alt="Cinemadoku" className="logo" />
+          )}
           <div className="puzzle-selector">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map(id => (
-              <button 
-                key={id}
-                onClick={() => setCurrentPuzzleId(id)}
-                className={currentPuzzleId === id ? 'active' : ''}
+            {availablePuzzles.map((puzzle) => (
+              <button
+                key={puzzle.id}
+                className={currentPuzzleId === puzzle.id ? 'active' : ''}
+                onClick={() => setCurrentPuzzleId(puzzle.id)}
               >
-                Puzzle {id}
+                Puzzle {puzzle.id}
               </button>
             ))}
           </div>
+          {!FEATURES.DEMO_MODE && (
+            <div className="theme-selector">
+              <ThemeSelector 
+                currentTheme={currentTheme}
+                onThemeChange={handleThemeChange}
+              />
+            </div>
+          )}
         </header>
         <div className="game-container">
           <div className="left-column">
@@ -227,10 +254,6 @@ function App() {
             />
           </div>
           <div className="right-column">
-            <ThemeSelector 
-              currentTheme={currentTheme}
-              onThemeChange={handleThemeChange}
-            />
             <Tiles 
               tiles={tiles.filter(tile => !tile.isPlaced)}
               onTileDrop={handleTileReturnToSlot}

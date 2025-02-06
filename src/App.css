@@ -13,27 +13,31 @@
   margin: 0;
   padding: 0;
   height: 120px;
-  background-color: #01090D;  /* Darkest color from palette */
+  background-color: var(--color-charcoal);
 }
 
+/* Demo mode title styling */
+.game-title {
+  margin: 0;
+  padding: 0 20px;
+  color: var(--color-light);
+  font-family: var(--font-heading);
+}
+
+/* Full mode logo styling */
 .logo {
   height: 100%;
   width: auto;
   object-fit: contain;
 }
 
-.game-title {
-  margin: 0;
-  padding: 0;
-  color: var(--color-charcoal);
-}
-
 .puzzle-selector {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;  /* Center the puzzle buttons */
   gap: 10px;
-  padding: 0 20px;
+  justify-content: center;
 }
 
 /* Adjust puzzle selector buttons to match theme */

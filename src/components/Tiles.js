@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useMemo, useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';
@@ -77,10 +77,13 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
   // Get puzzleId from the first tile
   const puzzleId = tiles?.[0]?.puzzleId || 'default';
 
-  // Shuffle only when puzzle changes
+  const unplacedTilesRef = useRef(unplacedTiles);
   useEffect(() => {
-    if (unplacedTiles.length > 0) {
-      // Fisher-Yates shuffle with additional entropy
+    unplacedTilesRef.current = unplacedTiles;
+  }, [unplacedTiles]);
+
+  useEffect(() => {
+    if (unplacedTilesRef.current.length > 0 && puzzleId) {
       const shuffleArray = array => {
         const seed = Date.now() + Math.random();
         for (let i = array.length - 1; i > 0; i--) {
@@ -90,7 +93,7 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
         return array;
       };
 
-      const positions = shuffleArray([...unplacedTiles.map(t => t.id)]);
+      const positions = shuffleArray([...unplacedTilesRef.current.map(t => t.id)]);
       const shuffledPositions = positions.reduce((acc, id, index) => {
         acc[id] = index;
         return acc;
@@ -98,9 +101,7 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
       
       setInitialPositions(shuffledPositions);
     }
-    
-    return () => setInitialPositions({});
-  }, [puzzleId, unplacedTiles]);
+  }, [puzzleId]); // Clean dependency array, no warning
   
   const slots = useMemo(() => 
     Array(Math.max(Object.keys(initialPositions).length, unplacedTiles.length))
