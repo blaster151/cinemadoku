@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 
 import './GameBoard.css';
 import Cell from './Cell.js';
-import Tiles from './Tiles';
 
 function GameBoard({ 
   boardTiles, 
@@ -20,7 +19,6 @@ function GameBoard({
   onTileRemoval,
 }) {
   const boardRef = useRef(null);
-  const tilesRef = useRef(null);
   const boardPattern = useMemo(() => [
     ['Actor', 'Movie', 'Actor', 'Movie', 'Actor'],
     ['Movie', null, 'Movie', null, 'Movie'],

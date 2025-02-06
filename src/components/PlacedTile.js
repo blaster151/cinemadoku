@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 import ActorImage from './ActorImage';
 import MovieTile from './MovieTile';

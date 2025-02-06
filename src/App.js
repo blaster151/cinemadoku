@@ -209,15 +209,6 @@ function App() {
     });
   }, [handleTilePlacement]);
 
-  const handlePuzzleChange = (direction) => {
-    const totalPuzzles = availablePuzzles.length;
-    if (direction === 'prev') {
-      setCurrentPuzzleId(currentPuzzleId - 1);
-    } else if (direction === 'next') {
-      setCurrentPuzzleId(currentPuzzleId + 1);
-    }
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
