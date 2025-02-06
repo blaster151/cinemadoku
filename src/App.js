@@ -25,6 +25,7 @@ function App() {
   };
 
   const [currentPuzzleId, setCurrentPuzzleId] = useState(getInitialPuzzleId);
+  const totalPuzzles = 2;  // Or however many puzzles you have
   const [tiles, setTiles] = useState([]);
   const [boardTiles, setBoardTiles] = useState({});
   const [activeHintColor, setActiveHintColor] = useState(null);
@@ -199,34 +200,36 @@ function App() {
     });
   }, [handleTilePlacement]);
 
+  const handlePuzzleChange = (direction) => {
+    const totalPuzzles = availablePuzzles.length;
+    if (direction === 'prev') {
+      setCurrentPuzzleId(currentPuzzleId - 1);
+    } else if (direction === 'next') {
+      setCurrentPuzzleId(currentPuzzleId + 1);
+    }
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="App">
         <header className="App-header">
-          {FEATURES.DEMO_MODE ? (
+          <div className="header-content">
             <h1 className="game-title">Cinemadoku</h1>
-          ) : (
-            <img src="/images/themes/2/logo.jpg" alt="Cinemadoku" className="logo" />
-          )}
-          <div className="puzzle-selector">
-            {availablePuzzles.map((puzzle) => (
-              <button
-                key={puzzle.id}
-                className={currentPuzzleId === puzzle.id ? 'active' : ''}
-                onClick={() => setCurrentPuzzleId(puzzle.id)}
+            <div className="puzzle-controls">
+              <button 
+                className={`puzzle-button ${currentPuzzleId === 6 ? 'active' : ''}`}
+                onClick={() => setCurrentPuzzleId(6)}
               >
-                Puzzle {puzzle.id}
+                Puzzle 6
               </button>
-            ))}
-          </div>
-          {!FEATURES.DEMO_MODE && (
-            <div className="theme-selector">
-              <ThemeSelector 
-                currentTheme={currentTheme}
-                onThemeChange={handleThemeChange}
-              />
+              <button 
+                className={`puzzle-button ${currentPuzzleId === 8 ? 'active' : ''}`}
+                onClick={() => setCurrentPuzzleId(8)}
+              >
+                Puzzle 8
+              </button>
             </div>
-          )}
+          </div>
         </header>
         <div className="game-container">
           <div className="left-column">

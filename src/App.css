@@ -3,6 +3,7 @@
   --color-blue-gray: #75838E;    /* Slate blue-gray */
   --color-light: #E2DDD7;        /* Warm light gray */
   --color-charcoal: #585350;     /* Deep charcoal */
+  --color-sand: #E2DDD7;         /* Our sand color */
 }
 
 /* Header styles */
@@ -19,9 +20,11 @@
 /* Demo mode title styling */
 .game-title {
   margin: 0;
-  padding: 0 20px;
-  color: var(--color-light);
-  font-family: var(--font-heading);
+  font-size: 48px;
+  color: var(--color-sand);  /* Using our sand color */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
 }
 
 /* Full mode logo styling */
@@ -265,4 +268,42 @@ body, button, input {
   line-height: 1;
   margin: 0 0 15px 0;
   padding: 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.puzzle-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.puzzle-button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--color-sand);
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--color-sand);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Add shadow for depth */
+}
+
+.puzzle-button:hover {
+  background-color: var(--color-sand);
+  color: var(--color-charcoal);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.puzzle-button.active {
+  background-color: var(--color-sand);
+  color: var(--color-charcoal);
 }

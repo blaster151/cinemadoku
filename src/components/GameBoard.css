@@ -160,7 +160,7 @@
 
 /* Incomplete state */
 .game-board-section .game-board-container .button-container .check-solution-button.incomplete {
-  opacity: 0.7 !important;
+  opacity: 1 !important;
 }
 
 .cell .loose-tile {
@@ -316,7 +316,7 @@
 
 /* Specific style for incomplete state */
 .check-solution-button.incomplete {
-  opacity: 0.7 !important;
+  opacity: 1 !important;
 }
 
 .cell .loose-tile.autosolving {
