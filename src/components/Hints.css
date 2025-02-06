@@ -3,33 +3,38 @@
   box-sizing: border-box;  /* Include padding in width calculation */
 }
 
+.hints-section .inner-container {
+  height: auto;
+  padding: 10px;
+  min-height: 0;  /* Override any min-height */
+}
+
 .hints-container {
-  width: 100%;
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
   padding: 0;
+  height: auto;  /* Let it size to content */
 }
 
 .hints-list {
-  width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0px;  /* Remove gap entirely */
+  gap: 0;
+  padding: 0;
+  margin: 0;
 }
 
 .hint-item {
   display: flex !important;
-  align-items: center !important;  /* Center align for better compact layout */
+  align-items: center !important;
   gap: 8px !important;
-  padding: 0px 8px !important;  /* Remove vertical padding */
+  padding: 0 8px !important;  /* Remove vertical padding completely */
+  margin: 0 !important;  /* Remove any margin */
+  height: 20px !important;  /* Fixed compact height */
   cursor: pointer;
   border-radius: 4px;
   color: var(--color-charcoal);
-  height: 24px;  /* Fixed height for consistency */
 }
 
 .hint-color {

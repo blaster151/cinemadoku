@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import ActorImage from './ActorImage';
+import LooseTile from './Tile';
 import MovieTile from './MovieTile';
 import './Tiles.css';
 
@@ -24,7 +24,7 @@ function Tile({ id, type, data, themeId }) {
     >
       {type === 'Actor' ? (
         <>
-          <ActorImage 
+          <LooseTile 
             name={data.name}
             onLoad={() => setImageLoaded(true)}
             className={imageLoaded ? 'loaded' : ''}
@@ -62,7 +62,20 @@ function TileSlot({ index, tile, onTileDrop, themeId }) {
   );
 }
 
-const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, themeId }, ref) => {
+const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, themeId, onTileRemoval }, ref) => {
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'tile',
+    drop: (item) => {
+      if (item.fromBoard) {
+        onTileRemoval(item.tile.id);
+      }
+      return undefined;
+    },
+    collect: monitor => ({
+      isOver: !!monitor.isOver()
+    })
+  }), [onTileRemoval]);
+
   const unplacedTiles = useMemo(() => 
     tiles?.filter(t => !t.isPlaced)
       .map(tile => ({
@@ -164,6 +177,21 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
     });
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    try {
+      const data = e.dataTransfer.getData('application/json');
+      if (data) {
+        const tileData = JSON.parse(data);
+        if (tileData.fromBoard) {
+          onTileRemoval(tileData.tile.id);
+        }
+      }
+    } catch (error) {
+      console.log('Invalid drop data');
+    }
+  };
+
   // Expose handleAutosolve to parent through ref
   useImperativeHandle(ref, () => ({
     handleAutosolve
@@ -173,13 +201,16 @@ const Tiles = forwardRef(({ tiles = [], onTileDrop, onAutosolve, boardRef, theme
     <div className="tiles-section">
       <h2>Tiles</h2>
       <div className="inner-container">
-        <div className="tiles-grid">
-          {slots.map(({ index, tile }) => (
-            <TileSlot 
-              key={tile ? `puzzle${puzzleId}-tile${tile.id}` : `puzzle${puzzleId}-empty-slot-${index}`}
-              index={index} 
-              tile={tile} 
-              onTileDrop={onTileDrop}
+        <div 
+          ref={drop}
+          className={`tiles-grid ${isOver ? 'is-over' : ''}`}
+          onDrop={handleDrop}
+          onDragOver={(e) => e.preventDefault()}
+        >
+          {tiles.map((tile) => (
+            <LooseTile
+              key={tile.id}
+              tile={tile}
               themeId={themeId}
             />
           ))}

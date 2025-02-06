@@ -175,20 +175,11 @@
   margin: 0;
 }
 
-/* Make tiles section fill available space */
-.tiles-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
 .tiles-grid {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 15px;
-  padding: 15px 0;
   align-content: start;
   width: 100%;
   overflow: hidden;
@@ -233,22 +224,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Style the check solution and autosolve buttons */
-.check-solution-button,
-.autosolve-button {
-  background: var(--color-blue-gray);
-  color: var(--color-light);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-}
-
-.check-solution-button:hover,
-.autosolve-button:hover {
-  background: var(--color-dark-gray);
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
@@ -262,15 +237,9 @@ body, button, input {
   background: #f5f5f5;  /* Match game board's inner background */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 15px;
+  padding: 15px 15px 34px 15px;
   width: 100%;
   box-sizing: border-box;
-}
-
-/* Apply inner container to all sections */
-.tiles-section .inner-container,
-.hints-section .inner-container {
-  height: 100%;
 }
 
 /* Section headers should be inside their containers */

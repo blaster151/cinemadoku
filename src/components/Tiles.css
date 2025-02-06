@@ -5,13 +5,17 @@
 .tiles-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 5px 10px;  /* 5px vertical, 10px horizontal */
-  max-width: 100%;
+  gap: 5px 15px;
   padding: 5px;
-  background: none;  /* Remove background */
-  min-height: 360px;
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
+  background: none;
+  min-height: 360px;
+  transition: background-color 0.2s ease;
+}
+
+.tiles-grid.is-over {
+  background-color: rgba(143, 211, 213, 0.1);  /* Light highlight when dragging over */
 }
 
 .tile-slot {
@@ -79,11 +83,13 @@
 
 /* Base loose tile styles */
 .loose-tile {
-  width: 144px;
-  height: 144px;
+  aspect-ratio: 1;  /* Force square aspect ratio */
+  width: 100%;
+  height: auto;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-color: white;
   cursor: move;
   position: relative;
