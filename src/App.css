@@ -194,16 +194,6 @@
   width: 100%;
 }
 
-/* Make only actor tile labels bigger */
-.loose-tile p {
-  font-size: 13px;
-}
-
-/* Keep movie titles at original size */
-.movie-title-only {
-  font-size: 11px;
-}
-
 body {
   margin: 0;
   padding: 0;

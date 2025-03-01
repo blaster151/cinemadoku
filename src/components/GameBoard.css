@@ -219,20 +219,6 @@
   font-weight: bold !important;  /* Made more forceful */
 }
 
-/* Keep existing hint-related styles */
-
-/* Update hint styles to match component classes */
-.hints-container {
-  width: 100%;
-  padding: 15px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  overflow: visible;
-  height: auto;
-  margin: 0;
-}
 
 /* Remove any lingering scroll properties */
 .hints-container > * {
@@ -402,17 +388,6 @@
   flex: 0 0 auto;
 }
 
-/* Add different text sizes for loose vs placed tiles */
-.tiles-grid .movie-title-only {
-  font-size: 14px;  /* Original size for loose tiles */
-  text-align: center;
-}
-
-.game-board .movie-title-only {
-  font-size: 11px;  /* Smaller size for placed tiles */
-  text-align: center;
-}
-
 /* Optional: adjust line height to keep text centered */
 .movie-title-only {
   transition: none !important;
@@ -445,4 +420,9 @@
 .hints-section {
   margin: 0;
   flex: 0 0 auto;
+}
+
+/* KEEP the winning specific selectors */
+.game-board .loose-tile .movie-title-only {
+  font-size: 18px !important;
 }
